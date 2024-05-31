@@ -1,0 +1,21 @@
+.agenda-escolar{
+    font-family: 'Dancing Script', cursive; /* Choose a decorative font */
+    font-size: 2em; /* Increase font size for emphasis */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a drop shadow */
+    color: #333; /* Use a dark color for contrast */
+    text-decoration: none; /* Remove default underline */
+  }
+  
+  /* h1 {
+    text-shadow: 
+        3px 3px 1px red,
+        5px 5px 2px yellow,
+        8px 8px 3px blue;
+} */
+
+/* h3 {
+  text-shadow: 
+      3px 3px 1px red,
+      5px 5px 2px yellow,
+      8px 8px 3px blue;
+} */
