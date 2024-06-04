@@ -113,3 +113,12 @@ Route::get('/admin/estudiantes/{id}', [App\Http\Controllers\EstudianteController
 Route::get('/admin/estudiantes/{id}/edit', [App\Http\Controllers\EstudianteController::class, 'edit'])->name('estudiantes.edit')->middleware('auth');
 Route::put('/admin/estudiantes/{id}', [App\Http\Controllers\EstudianteController::class, 'update'])->name('estudiantes.update')->middleware('auth');
 Route::delete('/admin/estudiantes/{id}', [App\Http\Controllers\EstudianteController::class, 'destroy'])->name('estudiantes.destroy')->middleware('auth');
+
+
+Route::get('/admin/paralelos', [App\Http\Controllers\ParaleloController::class, 'index'])->name('paralelos.index')->middleware('auth');
+Route::get('/admin/paralelos/create', [App\Http\Controllers\ParaleloController::class, 'create'])->name('paralelos.create')->middleware('auth');
+Route::post('/admin/paralelos', [App\Http\Controllers\ParaleloController::class, 'store'])->name('paralelos.store')->middleware('auth');
+Route::get('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'show'])->name('paralelos.show')->middleware('auth');
+Route::get('/admin/paralelos/{id}/edit', [App\Http\Controllers\ParaleloController::class, 'edit'])->name('paralelos.edit')->middleware('auth');
+Route::put('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'update'])->name('paralelos.update')->middleware('auth');
+Route::delete('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'destroy'])->name('paralelos.destroy')->middleware('auth');

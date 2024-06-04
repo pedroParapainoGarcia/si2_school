@@ -77,138 +77,114 @@ class SeedeerInicial extends Seeder
 
 
         $primaria1 = Grado::create([
-            'curso' => 'Primaria-1',
-            'paralelo' => 'A',
+            'curso' => 'Primaria-1',            
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-1',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-1',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-2',
-            'paralelo' => 'A',
+            'curso' => 'Primaria-2',            
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-2',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-2',            
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-2',
-            'paralelo' => 'C',
+            'curso' => 'Primaria-2',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         $primaria3 = Grado::create([
-            'curso' => 'Primaria-3',
-            'paralelo' => 'A',
+            'curso' => 'Primaria-3',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-3',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-3',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-4',
-            'paralelo' => 'A',
+            'curso' => 'Primaria-4',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-4',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-4',           
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-4',
-            'paralelo' => 'C',
-            'nivel_id' => $nivelpm->id,
-        ]);
-
-        Grado::create([
-            'curso' => 'Primaria-5',
-            'paralelo' => 'A',
-            'nivel_id' => $nivelpm->id,
-        ]);
-        Grado::create([
-            'curso' => 'Primaria-5',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-4',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-5',
-            'paralelo' => 'C',
+            'curso' => 'Primaria-5',           
+            'nivel_id' => $nivelpm->id,
+        ]);
+        Grado::create([
+            'curso' => 'Primaria-5',            
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-6',
-            'paralelo' => 'A',
+            'curso' => 'Primaria-5',           
             'nivel_id' => $nivelpm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Primaria-6',
-            'paralelo' => 'B',
+            'curso' => 'Primaria-6',            
+            'nivel_id' => $nivelpm->id,
+        ]);
+
+        Grado::create([
+            'curso' => 'Primaria-6',            
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-6',
-            'paralelo' => 'C',
+            'curso' => 'Primaria-6',            
             'nivel_id' => $nivelpm->id,
         ]);
         Grado::create([
-            'curso' => 'Primaria-6',
-            'paralelo' => 'D',
+            'curso' => 'Primaria-6',            
             'nivel_id' => $nivelpm->id,
         ]);
 
 
         Grado::create([
-            'curso' => 'Secundaria-1',
-            'paralelo' => 'A',
+            'curso' => 'Secundaria-1',           
             'nivel_id' => $nivelsm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Secundaria-2',
-            'paralelo' => 'A',
+            'curso' => 'Secundaria-2',            
             'nivel_id' => $nivelsm->id,
         ]);
         Grado::create([
-            'curso' => 'Secundaria-3',
-            'paralelo' => 'A',
-            'nivel_id' => $nivelsm->id,
-        ]);
-
-        Grado::create([
-            'curso' => 'Secundaria-4',
-            'paralelo' => 'A',
+            'curso' => 'Secundaria-3',            
             'nivel_id' => $nivelsm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Secundaria-5',
-            'paralelo' => 'A',
+            'curso' => 'Secundaria-4',            
             'nivel_id' => $nivelsm->id,
         ]);
 
         Grado::create([
-            'curso' => 'Secundaria-6',
-            'paralelo' => 'A',
+            'curso' => 'Secundaria-5',           
+            'nivel_id' => $nivelsm->id,
+        ]);
+
+        Grado::create([
+            'curso' => 'Secundaria-6',            
             'nivel_id' => $nivelsm->id,
         ]);
         Grado::create([
-            'curso' => 'Secundaria-6',
-            'paralelo' => 'B',
+            'curso' => 'Secundaria-6',            
             'nivel_id' => $nivelsm->id,
         ]);
 
@@ -293,6 +269,7 @@ class SeedeerInicial extends Seeder
         Docente::create([
             'id' => $usuarioprof->id,
             'especialidad' => 'Matematica',
+            'nivelFormacion'=>'Maestro de educacion Primaria',
         ]);
     }
 }

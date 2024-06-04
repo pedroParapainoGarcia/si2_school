@@ -98,11 +98,13 @@ class UsuarioController extends Controller
 
                 $request->validate([
                     'especialidad' => 'required',
+                    'nivelFormacion'=>'required',
                 ]);
 
                 $docente = new Docente();
                 $docente->id = $usuario->id;
                 $docente->especialidad = $request->especialidad;
+                $docente->nivelFormacion=$request->nivelFormacion;
                 $docente->save();
 
                 return redirect()->route('docentes.index')

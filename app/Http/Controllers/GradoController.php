@@ -33,15 +33,13 @@ class GradoController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'curso' => 'required',
-            'paralelo' => 'required',
+            'curso' => 'required',           
             'nivel_id' => 'required'
         ]);
 
         $grado = new Grado();
 
-        $grado->curso = $request->get('curso');
-        $grado->paralelo = $request->get('paralelo');
+        $grado->curso = $request->get('curso');        
         $grado->nivel_id = $request->get('nivel_id');
         $grado->save();
 
@@ -81,8 +79,7 @@ class GradoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'curso' => 'required',
-            'paralelo' => 'required',
+            'curso' => 'required',            
             'nivel_id' => 'required'
         ]);
 
