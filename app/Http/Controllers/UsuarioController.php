@@ -23,7 +23,8 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::with('roles')->get();
+
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
@@ -68,7 +69,7 @@ class UsuarioController extends Controller
         $usuario->fechaNacimiento = $request->fechaNacimiento;
         $usuario->telefono = $request->telefono;
         $usuario->sexo = $request->sexo;
-        $usuario->direccion=$request->direccion;
+        $usuario->direccion = $request->direccion;
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->ci); // Usar CI como password
         $usuario->save();
@@ -161,7 +162,7 @@ class UsuarioController extends Controller
     // Controlador ajustado
     private function createEstudiante(Request $request, User $usuario)
     {
-        $usuario->type ='Est.';
+        $usuario->type = 'Est.';
         $usuario->save();
 
         $estudiante = new Estudiante();
@@ -195,7 +196,7 @@ class UsuarioController extends Controller
         $usuariopf->fechaNacimiento = $request->fechaNacimientoPF;
         $usuariopf->telefono = $request->telefonoPF;
         $usuariopf->sexo = $request->sexoPF;
-        $usuariopf->direccion=$request->direccionPF;
+        $usuariopf->direccion = $request->direccionPF;
         $usuariopf->email = $request->emailPF;
         $usuariopf->password = Hash::make($request->ciPF); // O ajustar según la lógica de tu aplicación
         $usuariopf->type = 'PPff.';
@@ -304,6 +305,6 @@ class UsuarioController extends Controller
             ->with('mensaje', 'Se eliminó al usuario de la manera correcta')
             ->with('icono', 'success');
     }
+
+    
 }
-
-

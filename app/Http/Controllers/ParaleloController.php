@@ -6,6 +6,7 @@ use App\Models\Docente;
 use App\Models\Estudiante;
 use App\Models\Grado;
 use App\Models\Horario;
+use App\Models\Nivel;
 use App\Models\Paralelo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -115,14 +116,10 @@ class ParaleloController extends Controller
             ->with('icono', 'success');
     }
 
-    public function generatePDF($paralelo_id)
-{
-    // Obtener el paralelo y sus estudiantes
-    $paralelo = Paralelo::with('estudiante.usuario')->findOrFail($paralelo_id);
-
-    // Cargar la vista para el PDF
+    public function generatePDF($paralelo_id){
+   
+    $paralelo = Paralelo::with(['estudiante.usuario', 'grado.nivel.gestion', 'grado.nivel.colegio', 'docente.usuario'])->findOrFail($paralelo_id);
     $pdf = Pdf::loadView('admin.paralelos.report', compact('paralelo'));
-
     // Descargar el PDF con el nombre especificado
     return $pdf->stream('reporte_paralelo_' . $paralelo->nombre . '.pdf');
 }

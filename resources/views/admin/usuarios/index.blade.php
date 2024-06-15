@@ -16,7 +16,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-sm table-striped table-hover">
+                    {{-- <table class="table table-bordered table-sm table-striped table-hover"> --}}
+                    <table id="users" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                         <thead>
                             <tr>
                                 <th>
@@ -54,18 +55,17 @@
                                     <td style="text-align: center">{{ $contador }}</td>
 
                                     <td>
-                                        <span>{{ $usuario->nombre.' '.$usuario->apellidoPaterno.' '.$usuario->apellidoMaterno }}</span>
+                                        <span>{{ $usuario->nombre . ' ' . $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno }}</span>
                                     </td>
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->ci }}</td>
 
                                     <td>
-                                        @if (!empty($usuario->getRoleNames()))
-                                            @foreach ($usuario->getRoleNames() as $rolNombre)
-                                                <span>{{ $rolNombre }}</span>
-                                            @endforeach
-                                        @endif
+                                        @foreach ($usuario->roles as $rol)
+                                            <span>{{ $rol->name }}</span><br>
+                                        @endforeach
                                     </td>
+                                    
                                     <td>{{ $usuario->type }}</td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -115,3 +115,60 @@
         </div>
     </div>
 @endsection
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+@stop
+
+@section('js')
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+<!-- SUM()  Datatables-->
+<script src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
+
+<script>
+    $(document).ready(function() {
+    $('#users').DataTable({
+        
+        responsive: true,
+        autoWidth: false,
+        "language": {
+            "lengthMenu": "Mostrar" + 
+            `<select>
+                <option value = '5'>5</option>
+                <option value = '10'>10</option>
+                <option value = '25'>25</option>
+                <option value='100'>100</option>
+                <option value='-1'>All</option>
+                </select>` +            
+            "registros por página",
+            "zeroRecords": "Nada encontrado - disculpa",
+            "info": "Mostrando la página _PAGE_ de _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtrando de _MAX_ registros totales)",
+            'search': 'Buscar:',
+            'paginate':{
+                'next':'Siguiente',
+                'previous':'Anterior'
+            }
+        },
+        
+        
+    });  
+
+ 
+
+
+
+} ); 
+
+</script>
+
+@stop

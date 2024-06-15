@@ -78,7 +78,7 @@
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('paralelos.generatePDF', $paralelo->id) }}" type="button"
-                                                class="btn btn-danger">Reporte <i class="fas fa-file-pdf ml-2"></i></a>
+                                                class="btn btn-danger" target="_blank">Reporte <i class="fas fa-file-pdf ml-2"></i></a>
 
                                             <a href="{{ route('paralelos.show', $paralelo->id) }}" type="button"
                                                 class="btn btn-info">

@@ -32,6 +32,8 @@ Route::get('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::clas
 Route::get('/admin/usuarios/{id}/edit', [App\Http\Controllers\UsuarioController::class, 'edit'])->name('usuarios.edit')->middleware('auth');
 Route::put('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'update'])->name('usuarios.update')->middleware('auth');
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('usuarios.destroy')->middleware('auth');
+Route::get('/asignar-roles', [App\Http\Controllers\UsuarioController::class, 'asignarRoles']);
+
 
 Route::get('/admin/roles', [App\Http\Controllers\RolController::class, 'index'])->name('roles.index')->middleware('auth');
 Route::get('/admin/roles/create', [App\Http\Controllers\RolController::class, 'create'])->name('roles.create')->middleware('auth');

@@ -43,6 +43,7 @@ class SeedeerInicial extends Seeder
         //     'fechaNacimiento' => Carbon::parse('1974-08-01'),
         //     'telefono' => '73980236',
         //     'sexo' => 'M',
+        //     'direccion'=>'centenario 3er anillo',
         //     'direccion' => 'BARRIO LINDO N°15',            
         //     'email' => 'admin@gmail.com',
         //     'password' => bcrypt('8093807'),
@@ -124,6 +125,7 @@ class SeedeerInicial extends Seeder
         //     'fechaNacimiento' => Carbon::parse('1984-04-01'),
         //     'telefono' => '67718151',
         //     'sexo' => 'M',
+        //     'direccion'=>'centenario 4to anillo',
         //     'email' => 'juanpa@gmail.com',
         //     'password' => bcrypt('8093809'),
         //     'type' => 'PPff.',
@@ -134,7 +136,7 @@ class SeedeerInicial extends Seeder
         //     'ocupacionLaboral' => 'Comerciante',
         //     'mayorGradoInstruccion' => 'Educación secundaria completa',
         //     'tipo' => 'PF',
-        //     'estado' => '1',
+            
         // ]);
 
 
@@ -148,6 +150,7 @@ class SeedeerInicial extends Seeder
         //     'fechaNacimiento' => Carbon::parse('1980-02-01'),
         //     'telefono' => '70011062',
         //     'sexo' => 'M',
+        //     'direccion'=>'centenario 5to anillo',
         //     'email' => 'mario@gmail.com',
         //     'password' => bcrypt('8112694'),
         //     'type' => 'prof.',
