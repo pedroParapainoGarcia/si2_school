@@ -111,6 +111,17 @@
                                 </div>
                             </div>
 
+                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                <div class="form-group">
+                                    <label for="direccion">DIRECCION</label>
+                                    <input type="text" name="direccion" id="direccion"
+                                        class="form-control" required autocomplete="off">
+                                    @error('direccion')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-xs-12 col-sm-12 col-md-3">
                                 <div class="form-group">
 

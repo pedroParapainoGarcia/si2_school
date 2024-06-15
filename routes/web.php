@@ -114,6 +114,14 @@ Route::get('/admin/estudiantes/{id}/edit', [App\Http\Controllers\EstudianteContr
 Route::put('/admin/estudiantes/{id}', [App\Http\Controllers\EstudianteController::class, 'update'])->name('estudiantes.update')->middleware('auth');
 Route::delete('/admin/estudiantes/{id}', [App\Http\Controllers\EstudianteController::class, 'destroy'])->name('estudiantes.destroy')->middleware('auth');
 
+Route::get('/admin/asignacionmaterias', [App\Http\Controllers\AsignacionMateriaController::class, 'index'])->name('asignacionmaterias.index')->middleware('auth');
+Route::get('/admin/asignacionmaterias/create', [App\Http\Controllers\AsignacionMateriaController::class, 'create'])->name('asignacionmaterias.create')->middleware('auth');
+Route::post('/admin/asignacionmaterias', [App\Http\Controllers\AsignacionMateriaController::class, 'store'])->name('asignacionmaterias.store')->middleware('auth');
+Route::get('/admin/asignacionmaterias/{id}', [App\Http\Controllers\AsignacionMateriaController::class, 'show'])->name('asignacionmaterias.show')->middleware('auth');
+Route::get('/admin/asignacionmaterias/{id}/edit', [App\Http\Controllers\AsignacionMateriaController::class, 'edit'])->name('asignacionmaterias.edit')->middleware('auth');
+Route::put('/admin/asignacionmaterias/{id}', [App\Http\Controllers\AsignacionMateriaController::class, 'update'])->name('asignacionmaterias.update')->middleware('auth');
+Route::delete('/admin/asignacionmaterias/{id}', [App\Http\Controllers\AsignacionMateriaController::class, 'destroy'])->name('asignacionmaterias.destroy')->middleware('auth');
+
 
 Route::get('/admin/paralelos', [App\Http\Controllers\ParaleloController::class, 'index'])->name('paralelos.index')->middleware('auth');
 Route::get('/admin/paralelos/create', [App\Http\Controllers\ParaleloController::class, 'create'])->name('paralelos.create')->middleware('auth');
@@ -121,4 +129,64 @@ Route::post('/admin/paralelos', [App\Http\Controllers\ParaleloController::class,
 Route::get('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'show'])->name('paralelos.show')->middleware('auth');
 Route::get('/admin/paralelos/{id}/edit', [App\Http\Controllers\ParaleloController::class, 'edit'])->name('paralelos.edit')->middleware('auth');
 Route::put('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'update'])->name('paralelos.update')->middleware('auth');
-Route::delete('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'destroy'])->name('paralelos.destroy')->middleware('auth');
+Route::delete('/admin/paralelos/{id}', [App\Http\Controllers\ParaleloController::class, 'destroy'])->name('paralelos.destroy')->middleware('auth'); 
+
+Route::get('paralelos/{id}/generatePDF', [App\Http\Controllers\ParaleloController::class, 'generatePDF'])->name('paralelos.generatePDF')->middleware('auth');
+
+
+Route::get('/admin/aulas', [App\Http\Controllers\AulaController::class, 'index'])->name('aulas.index')->middleware('auth');
+Route::get('/admin/aulas/create', [App\Http\Controllers\AulaController::class, 'create'])->name('aulas.create')->middleware('auth');
+Route::post('/admin/aulas', [App\Http\Controllers\AulaController::class, 'store'])->name('aulas.store')->middleware('auth');
+Route::get('/admin/aulas/{id}', [App\Http\Controllers\AulaController::class, 'show'])->name('aulas.show')->middleware('auth');
+Route::get('/admin/aulas/{id}/edit', [App\Http\Controllers\AulaController::class, 'edit'])->name('aulas.edit')->middleware('auth');
+Route::put('/admin/aulas/{id}', [App\Http\Controllers\AulaController::class, 'update'])->name('aulas.update')->middleware('auth');
+Route::delete('/admin/aulas/{id}', [App\Http\Controllers\AulaController::class, 'destroy'])->name('aulas.destroy')->middleware('auth');
+
+Route::get('/admin/dias', [App\Http\Controllers\DiaController::class, 'index'])->name('dias.index')->middleware('auth');
+Route::get('/admin/dias/create', [App\Http\Controllers\DiaController::class, 'create'])->name('dias.create')->middleware('auth');
+Route::post('/admin/dias', [App\Http\Controllers\DiaController::class, 'store'])->name('dias.store')->middleware('auth');
+Route::get('/admin/dias/{id}', [App\Http\Controllers\DiaController::class, 'show'])->name('dias.show')->middleware('auth');
+Route::get('/admin/dias/{id}/edit', [App\Http\Controllers\DiaController::class, 'edit'])->name('dias.edit')->middleware('auth');
+Route::put('/admin/dias/{id}', [App\Http\Controllers\DiaController::class, 'update'])->name('dias.update')->middleware('auth');
+Route::delete('/admin/dias/{id}', [App\Http\Controllers\DiaController::class, 'destroy'])->name('dias.destroy')->middleware('auth'); 
+
+Route::get('/admin/intervalos', [App\Http\Controllers\IntervaloController::class, 'index'])->name('intervalos.index')->middleware('auth');
+Route::get('/admin/intervalos/create', [App\Http\Controllers\IntervaloController::class, 'create'])->name('intervalos.create')->middleware('auth');
+Route::post('/admin/intervalos', [App\Http\Controllers\IntervaloController::class, 'store'])->name('intervalos.store')->middleware('auth');
+Route::get('/admin/intervalos/{id}', [App\Http\Controllers\IntervaloController::class, 'show'])->name('intervalos.show')->middleware('auth');
+Route::get('/admin/intervalos/{id}/edit', [App\Http\Controllers\IntervaloController::class, 'edit'])->name('intervalos.edit')->middleware('auth');
+Route::put('/admin/intervalos/{id}', [App\Http\Controllers\IntervaloController::class, 'update'])->name('intervalos.update')->middleware('auth');
+Route::delete('/admin/intervalos/{id}', [App\Http\Controllers\IntervaloController::class, 'destroy'])->name('intervalos.destroy')->middleware('auth');
+
+Route::get('/admin/periodos', [App\Http\Controllers\PeriodoController::class, 'index'])->name('periodos.index')->middleware('auth');
+Route::get('/admin/periodos/create', [App\Http\Controllers\PeriodoController::class, 'create'])->name('periodos.create')->middleware('auth');
+Route::post('/admin/periodos', [App\Http\Controllers\PeriodoController::class, 'store'])->name('periodos.store')->middleware('auth');
+Route::get('/admin/periodos/{id}', [App\Http\Controllers\PeriodoController::class, 'show'])->name('periodos.show')->middleware('auth');
+Route::get('/admin/periodos/{id}/edit', [App\Http\Controllers\PeriodoController::class, 'edit'])->name('periodos.edit')->middleware('auth');
+Route::put('/admin/periodos/{id}', [App\Http\Controllers\PeriodoController::class, 'update'])->name('periodos.update')->middleware('auth');
+Route::delete('/admin/periodos/{id}', [App\Http\Controllers\PeriodoController::class, 'destroy'])->name('periodos.destroy')->middleware('auth');
+
+Route::get('/admin/horarios', [App\Http\Controllers\HorarioController::class, 'index'])->name('horarios.index')->middleware('auth');
+Route::get('/admin/horarios/create', [App\Http\Controllers\HorarioController::class, 'create'])->name('horarios.create')->middleware('auth');
+Route::post('/admin/horarios', [App\Http\Controllers\HorarioController::class, 'store'])->name('horarios.store')->middleware('auth');
+Route::get('/admin/horarios/{id}', [App\Http\Controllers\HorarioController::class, 'show'])->name('horarios.show')->middleware('auth');
+Route::get('/admin/horarios/{id}/edit', [App\Http\Controllers\HorarioController::class, 'edit'])->name('horarios.edit')->middleware('auth');
+Route::put('/admin/horarios/{id}', [App\Http\Controllers\HorarioController::class, 'update'])->name('horarios.update')->middleware('auth');
+Route::delete('/admin/horarios/{id}', [App\Http\Controllers\HorarioController::class, 'destroy'])->name('horarios.destroy')->middleware('auth');
+
+
+Route::get('/admin/tutores', [App\Http\Controllers\PadreDeFamiliaController::class, 'index'])->name('tutores.index')->middleware('auth');
+Route::get('/admin/tutores/create', [App\Http\Controllers\PadreDeFamiliaController::class, 'create'])->name('tutores.create')->middleware('auth');
+Route::post('/admin/tutores', [App\Http\Controllers\PadreDeFamiliaController::class, 'store'])->name('tutores.store')->middleware('auth');
+Route::get('/admin/tutores/{id}', [App\Http\Controllers\PadreDeFamiliaController::class, 'show'])->name('tutores.show')->middleware('auth');
+Route::get('/admin/tutores/{id}/edit', [App\Http\Controllers\PadreDeFamiliaController::class, 'edit'])->name('tutores.edit')->middleware('auth');
+Route::put('/admin/tutores/{id}', [App\Http\Controllers\PadreDeFamiliaController::class, 'update'])->name('tutores.update')->middleware('auth');
+Route::delete('/admin/tutores/{id}', [App\Http\Controllers\PadreDeFamiliaController::class, 'destroy'])->name('tutores.destroy')->middleware('auth');
+
+Route::get('/admin/tutorestudiantes', [App\Http\Controllers\TutorEstudianteController::class, 'index'])->name('tutorestudiantes.index')->middleware('auth');
+Route::get('/admin/tutorestudiantes/create', [App\Http\Controllers\TutorEstudianteController::class, 'create'])->name('tutorestudiantes.create')->middleware('auth');
+Route::post('/admin/tutorestudiantes', [App\Http\Controllers\TutorEstudianteController::class, 'store'])->name('tutorestudiantes.store')->middleware('auth');
+Route::get('/admin/tutorestudiantes/{id}', [App\Http\Controllers\TutorEstudianteController::class, 'show'])->name('tutorestudiantes.show')->middleware('auth');
+Route::get('/admin/tutorestudiantes/{id}/edit', [App\Http\Controllers\TutorEstudianteController::class, 'edit'])->name('tutorestudiantes.edit')->middleware('auth');
+Route::put('/admin/tutorestudiantes/{id}', [App\Http\Controllers\TutorEstudianteController::class, 'update'])->name('tutorestudiantes.update')->middleware('auth');
+Route::delete('/admin/tutorestudiantes/{id}', [App\Http\Controllers\TutorEstudianteController::class, 'destroy'])->name('tutorestudiantes.destroy')->middleware('auth');

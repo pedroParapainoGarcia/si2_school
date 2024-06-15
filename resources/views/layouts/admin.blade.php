@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Custom CSS -->
     {{-- <link rel="stylesheet" href="/dist/css/agenda-escolar.css"> --}}
     {{-- <link rel="stylesheet" href="{{ '/dist/css/tarjetas.css' }}"> --}}
-
+    
 
     @yield('styles')
 
@@ -173,6 +173,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                             </ul>
 
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/aulas') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>lista de aulas</p>
+                                    </a>
+                                </li>
+                            </ul>
+
                         </li>
 
                         <li class="nav-item">
@@ -201,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="bi bi-bar-chart-steps"></i>
 
                                 <p>
-                                    Gestionar Grados
+                                    Gestionar Cursos
 
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -210,7 +219,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="{{ url('/admin/grados') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de grados</p>
+                                        <p>listado de cursos</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/paralelos') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>listado de paralelos</p>
                                     </a>
                                 </li>
                             </ul>
@@ -253,6 +271,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                             </ul>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/asignacionmaterias') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Asignacion Materias</p></p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="nav-item">
@@ -270,6 +297,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ url('/admin/materias') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Listado de Materias</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">                                
+                                <i class="fas fa-clipboard-check"></i>
+                                <p>
+                                    Gestionar Horario
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/dias') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listado de dias</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/periodos') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listado de periodos</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/intervalos') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listado de Intervalos </p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/horarios') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listado de Horarios </p>
                                     </a>
                                 </li>
                             </ul>
@@ -299,7 +368,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>listado de estudiantes</p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> 
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/tutores') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>listado de tutores</p>
+                                    </a>
+                                </li>
+                            </ul> 
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/tutorestudiantes') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>listado de tutor/est.</p>
+                                    </a>
+                                </li>
+                            </ul> 
                         </li>
                         @guest
                             @if (Route::has('login'))

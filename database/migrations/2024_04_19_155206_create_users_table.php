@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('ci')->unique();  
             $table->date('fechaNacimiento');        
             $table->integer('telefono'); 
-            $table->enum('sexo', ['M', 'F']); // Campo enum para el sexo                     
+            $table->enum('sexo', ['M', 'F']); // Campo enum para el sexo     
+            $table->string('direccion');                
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->unique();         

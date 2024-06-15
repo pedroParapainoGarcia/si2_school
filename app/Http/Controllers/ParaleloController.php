@@ -2,64 +2,129 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Docente;
+use App\Models\Estudiante;
+use App\Models\Grado;
+use App\Models\Horario;
 use App\Models\Paralelo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ParaleloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $paralelos = Paralelo::all();
+        $grados = Grado::all();
+        $docentes = Docente::all();
+        return view('admin.paralelos.index', compact('paralelos', 'grados', 'docentes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        $grados = Grado::all();
+        $usuarios = User::all();
+        $docentes = Docente::all();
+        return view('admin.paralelos.create', compact('grados', 'docentes', 'usuarios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'nombre' => 'required',
+            'cupo' => 'required',
+            'grado_id' => 'required',
+            'docente_id' => 'required',
+        ]);
+
+        $paralelo = new Paralelo();
+
+        $paralelo->nombre = $request->get('nombre');
+        $paralelo->cupo = $request->get('cupo');
+        $paralelo->grado_id = $request->get('grado_id');
+        $paralelo->docente_id = $request->get('docente_id');
+        $paralelo->save();
+
+        return redirect()->route('paralelos.index')
+            ->with('mensaje', 'Se registro el paralelo de manera correcta')
+            ->with('icono', 'success');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Paralelo $paralelo)
+
+    public function show($id)
     {
-        //
+
+
+        $grado = Grado::all();
+        $paralelo = Paralelo::findOrFail($id);
+        $iduser = $paralelo->docente_id;
+        $docente = Docente::findOrFail($iduser);
+        $horario = Horario::all();
+        return view('admin.paralelos.show', compact('docente', 'grado', 'paralelo', 'horario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Paralelo $paralelo)
+
+
+    public function edit($id)
     {
-        //
+        $paralelo = Paralelo::findOrFail($id);
+        $grados = Grado::all();
+        $grado = [];
+        foreach ($grados as $gradoItem) {
+            $grado[$gradoItem->id] = $gradoItem->grado;
+        }
+        $docentes = Docente::all();
+        $usuario = User::all();
+        return view('admin.paralelos.edit', compact('paralelo', 'grado', 'docentes', 'usuario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Paralelo $paralelo)
+
+
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'nombre' => 'required',
+            'cupo' => 'required',
+            'grado_id' => 'required',
+            'docente_id' => 'required',
+        ]);
+
+        $input = $request->all();
+        $paralelo = Paralelo::find($id);
+        $paralelo->update($input);
+
+
+        return redirect()->route('paralelos.index')
+            ->with('mensaje', 'Se actualizó el paralelo correctamente')
+            ->with('icono', 'success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Paralelo $paralelo)
+
+    public function destroy($id)
     {
-        //
+        Paralelo::destroy($id);
+        return redirect()->route('paralelos.index')
+            ->with('mensaje', 'Se eliminó el paralelo de  manera correcta')
+            ->with('icono', 'success');
     }
+
+    public function generatePDF($paralelo_id)
+{
+    // Obtener el paralelo y sus estudiantes
+    $paralelo = Paralelo::with('estudiante.usuario')->findOrFail($paralelo_id);
+
+    // Cargar la vista para el PDF
+    $pdf = Pdf::loadView('admin.paralelos.report', compact('paralelo'));
+
+    // Descargar el PDF con el nombre especificado
+    return $pdf->stream('reporte_paralelo_' . $paralelo->nombre . '.pdf');
+}
+
 }

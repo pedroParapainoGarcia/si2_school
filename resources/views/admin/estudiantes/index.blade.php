@@ -25,12 +25,7 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                                <th>
-                                    <center>Ap.Paterno</center>
-                                </th>
-                                <th>
-                                    <center>Ap.Materno</center>
-                                </th>
+                                
                                 <th>
                                     <center>Nro. Ci</center>
                                 </th>
@@ -51,11 +46,11 @@
                                     <center>Nivel</center>
                                 </th>
                                 <th>
-                                    <center>Grado</center>
+                                    <center>Curso</center>
                                 </th>
-                                <th>
+                                {{-- <th>
                                     <center>Padre</center>
-                                </th>
+                                </th> --}}
                                 <th>
                                     <center>Acciones</center>
                                 </th>
@@ -68,14 +63,11 @@
                                     <td style="text-align: center">{{ $estudiante->id }}</td>
                                     @php
                                         $usuario = $usuarios->firstWhere('id', $estudiante->id); 
-                                        $padre = $usuarios->firstWhere('id', $estudiante->padre_id);                                       
+                                        //$padre = $usuarios->firstWhere('id', $estudiante->padre_id);                                       
                                         $nivel = $niveles->firstWhere('id', $estudiante->nivel_id);
-                                        $grado = $grados->firstWhere('id', $estudiante->grado_id);
-                                    @endphp
-
-                                    <td>{{ $usuario ? $usuario->nombre : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoPaterno : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoMaterno : '' }}</td>
+                                        $paralelo = $paralelos->firstWhere('id', $estudiante->paralelo_id);
+                                    @endphp                                   
+                                    <td>{{ $usuario ? $usuario->apellidoPaterno.' '.$usuario->apellidoMaterno .' '. $usuario->nombre : '' }}</td>                                      
                                     <td>{{ $usuario ? $usuario->ci : '' }}</td>
                                     <td>{{ $usuario ? $usuario->fechaNacimiento: '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
@@ -83,9 +75,9 @@
                                     
                                     <td>{{ $estudiante->nro_rude }}</td>
                                     
-                                    <td>{{ $nivel ? $nivel->nivel . '-' . $nivel->turno : '' }}</td>
-                                    <td>{{ $grado ? $grado->curso . '-' . $grado->paralelo : '' }}</td>
-                                    <td>{{ $padre ? $padre->nombre . ' ' . $padre->apellidoPaterno : '' }}</td>
+                                    <td>{{ $nivel ? $nivel->nombre : '' }}</td>
+                                    <td>{{ $paralelo ? $paralelo->nombre  : '' }}</td>
+                                    {{-- <td>{{ $padre ? $padre->nombre . ' ' . $padre->apellidoPaterno . ' ' . $padre->apellidoMaterno : '' }}</td> --}}
 
 
                                     <td style="text-align:center">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Nuevo Grado</h1>
+        <h1>Nuevo Paralelo</h1>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -11,46 +11,61 @@
                     <h3 class="card-title">Llene los datos</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/admin/grados') }}" method="post">
+                    <form action="{{ url('/admin/paralelos ') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="">Curso</label>
-                                    <select name="curso" id="" class="form-control">
-                                        <option value="Primaria-1">Primaria-1</option>
-                                        <option value="Primaria-2">Primaria-2</option>
-                                        <option value="Primaria-3">Primaria-3</option>
-                                        <option value="Primaria-4">Primaria-4</option>
-                                        <option value="Primaria-5">Primaria-5</option>
-                                        <option value="Primaria-6">Primaria-6</option>
-                                        <option value="Secundaria-1">Secundaria-1</option>
-                                        <option value="Secundaria-2">Secundaria-2</option>
-                                        <option value="Secundaria-3">Secundaria-3</option>
-                                        <option value="Secundaria-4">Secundaria-4</option>
-                                        <option value="Secundaria-5">Secundaria-5</option>
-                                        <option value="Secundaria-6">Secundaria-6</option>
-                                    </select>
+                                    <label for="">Nombre de Paralelo</label>
+                                    <input type="text" value="{{ old('nombre') }}" name="nombre" class="form-control"
+                                        required>
+                                    @error('nombre')
+                                        <small style="color: red">{{ $message }}</small>
+                                    @enderror
                                 </div>
-                            </div>                           
+                            </div> 
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Cupo de Paralelo</label>
+                                    <input type="number" value="{{ old('cupo') }}" name="cupo" class="form-control"
+                                        required>
+                                    @error('cupo')
+                                        <small style="color: red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
 
 
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="nivel_id">Nivel</label>
-                                    <select required class="form-control" name="nivel_id" id="nivel_id">
-                                        @foreach ($niveles as $nivel)
-                                            <option value="{{ $nivel->id }}">{{ $nivel->nivel . ' - ' . $nivel->turno }}</option>
+                                    <label for="grado_id">Curso</label>
+                                    <select required class="form-control" name="grado_id" id="grado_id">
+                                        @foreach ($grados as $grado)
+                                            <option value="{{ $grado->id }}">{{ $grado->grado }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> 
+
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="docente_id">Tutor</label>
+                                    <select required class="form-control" name="docente_id" id="docente_id">
+                                        @foreach ($docentes as $docente)
+                                            <option value="{{ $docente->id }}">{{ $docente->usuario->nombre . ' ' . $docente->usuario->apellidoPaterno }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> 
+
+
                         </div>
 
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ url('admin/grados') }}" class="btn btn-secondary">Cancelar</a>
+                                <a href="{{ url('admin/paralelos') }}" class="btn btn-secondary">Cancelar</a>
                                 <button type="submit" class="btn btn-primary"><i class="bi bi-floppy2"></i> Guardar
                                     registro</button>
                             </div>

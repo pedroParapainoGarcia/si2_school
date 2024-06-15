@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('nivels', function (Blueprint $table) {
             $table->id();
-            $table->string('nivel');
-            $table->string('turno');
+            $table->string('nombre');
             $table->foreignId('gestion_id')
                 ->constrained('gestions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('colegio_id')
+                ->constrained('colegios')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();

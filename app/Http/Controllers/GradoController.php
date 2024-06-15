@@ -33,13 +33,13 @@ class GradoController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'curso' => 'required',           
+            'grado' => 'required',           
             'nivel_id' => 'required'
         ]);
 
         $grado = new Grado();
 
-        $grado->curso = $request->get('curso');        
+        $grado->grado = $request->get('grado');        
         $grado->nivel_id = $request->get('nivel_id');
         $grado->save();
 
@@ -68,7 +68,7 @@ class GradoController extends Controller
         $niveles = Nivel::all();
         $nivel = [];
         foreach ($niveles as $nivelItem) {
-            $nivel[$nivelItem->id] = $nivelItem->nivel . '-' . $nivelItem->turno;
+            $nivel[$nivelItem->id] = $nivelItem->nombre;
         }
         return view('admin.grados.edit', compact('grado', 'nivel'));
     }
@@ -79,7 +79,7 @@ class GradoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'curso' => 'required',            
+            'grado' => 'required',            
             'nivel_id' => 'required'
         ]);
 
@@ -101,7 +101,7 @@ class GradoController extends Controller
     {
         Grado::destroy($id);
         return redirect()->route('grados.index')
-            ->with('mensaje', 'Se eliminó el aula de  manera correcta')
+            ->with('mensaje', 'Se eliminó el grado de  manera correcta')
             ->with('icono', 'success');
     }
 }

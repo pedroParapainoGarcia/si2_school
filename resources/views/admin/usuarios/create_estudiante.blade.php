@@ -5,7 +5,7 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <h1>Creación de un nuevo Estudiante</h1>
+                <h3>Registro de un nuevo Estudiante</h3>
             </div>
             <form action="{{ route('usuarios.store') }}" method="post" id="formularioEstudiante">
                 @csrf
@@ -29,9 +29,9 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="apellidoPaterno">Apellido Paterno</label>
+                                            <label for="apellidoPaterno">Ap. Paterno</label>
                                             <input type="text" name="apellidoPaterno" id="apellidoPaterno"
                                                 class="form-control" required autocomplete="off">
                                             @error('apellidoPaterno')
@@ -39,9 +39,9 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="apellidoMaterno">Apellido Materno</label>
+                                            <label for="apellidoMaterno">Ap. Materno</label>
                                             <input type="text" name="apellidoMaterno" id="apellidoMaterno"
                                                 class="form-control" required autocomplete="off">
                                             @error('apellidoMaterno')
@@ -69,7 +69,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="telefono">Telefono</label>
                                             <input type="number" name="telefono" id="telefono" class="form-control"
@@ -99,7 +99,18 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="direccion">DIRECCION</label>
+                                            <input type="text" name="direccion" id="direccion"
+                                                class="form-control" required autocomplete="off">
+                                            @error('direccion')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email" id="email" class="form-control"
@@ -109,7 +120,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="roles">Rol</label>
                                             <select required class="form-control" name="roles" id="roles">
@@ -136,13 +147,13 @@
                             <div class="card-body">
                                 <!-- Datos academico del Estudiante -->
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
                                         <div class="form-group">
                                             <label for="nivel_id">Nivel</label>
                                             <select name="nivel_id" id="nivel_id" class="form-control">
                                                 @foreach ($niveles as $nivel)
                                                     <option value="{{ $nivel->id }}">
-                                                        {{ $nivel->nivel . ' - ' . $nivel->turno }}</option>
+                                                        {{ $nivel->nombre}}</option>
                                                 @endforeach
                                             </select>
                                             @error('nivel_id')
@@ -150,16 +161,16 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
                                         <div class="form-group">
-                                            <label for="grado_id">Grado</label>
-                                            <select required class="form-control" name="grado_id" id="grado_id">
-                                                @foreach ($grados as $grado)
-                                                    <option value="{{ $grado->id }}">
-                                                        {{ $grado->curso . ' - ' . $grado->paralelo }}</option>
+                                            <label for="paralelo_id">Curso</label>
+                                            <select required class="form-control" name="paralelo_id" id="paralelo_id">
+                                                @foreach ($paralelos as $paralelo)
+                                                    <option value="{{ $paralelo->id }}">
+                                                        {{ $paralelo->nombre }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('grado_id')
+                                            @error('paralelo_id')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
@@ -191,7 +202,7 @@
                                     <div id="consulta" class="additional-inputs col-xs-12 col-sm-12 col-md-4">
 
                                         <div class="form-group">
-                                            <span class="info-box-text"><b>¿Tiene un padre registrado?</b></span>
+                                            <span class="info-box-text"><b>¿Tiene un Hijo/Apoderado registrado?</b></span>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="parent_status"
                                                     id="parent_status_yes" value="yes">
@@ -214,7 +225,7 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <div id="ci-check" style="display: none;" class="col-md-3">
+                                    <div id="ci-check" style="display: none;" class="col-md-2">
                                         <div class="form-group">
                                             <label for="ciPF_check">CI del Padre:</label>
                                             <input type="text" name="ciPF_check" id="ciPF_check"
@@ -239,7 +250,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="ap_paternoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-3">
+                                            <div id="ap_paternoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="apellido_paternoPF">Apellido Paterno</label>
                                                     <input type="text" name="apellidoPaternoPF"
@@ -249,7 +260,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div id="ap_maternoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-3">
+                                            <div id="ap_maternoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="apellido_maternoPF">Apellido Materno</label>
                                                     <input type="text" name="apellidoMaternoPF"
@@ -280,7 +291,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div id="telPF" class="additional-inputs col-xs-12 col-sm-12 col-md-3">
+                                            <div id="telPF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="telefono_PF">Teléfono</label>
                                                     <input type="number" name="telefonoPF" id="telefono_PF"
@@ -312,7 +323,19 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div id="correoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-3">
+
+                                            <div id="direccionPPFF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label for="direccion_PF">DIRECCION</label>
+                                                    <input type="text" name="direccionPF" id="direccion_PF"
+                                                        class="form-control" required autocomplete="off">
+                                                    @error('direccionPF')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div id="correoPF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="email_PF">Email</label>
                                                     <input type="email" name="emailPF" id="email_PF"
@@ -337,17 +360,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="ocupacionPF" class="additional-inputs col-xs-12 col-sm-12 col-md-4">
-                                                <div class="form-group">
-                                                    <label for="ocupacion_Laboral">Ocupación Laboral</label>
-                                                    <input type="text" name="ocupacionLaboral" id="ocupacion_Laboral"
-                                                        autocomplete="off" class="form-control"
-                                                        value="{{ old('ocupacionLaboral') }}">
-                                                    @error('ocupacionLaboral')
-                                                        <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                           
 
                                             <div id="GradoInstruccionPF"
                                                 class="additional-inputs col-xs-12 col-sm-12 col-md-5">
@@ -360,26 +373,31 @@
                                                         </option>
                                                         <option value="primaria_completa">Educación primaria completa
                                                         </option>
-                                                        <option value="secundaria_incompleta">Educación secundaria
-                                                            incompleta
+                                                        <option value="secundaria_incompleta">Educación secundaria incompleta
                                                         </option>
                                                         <option value="secundaria_completa">Educación secundaria completa
                                                         </option>
-                                                        <option value="tecnica_incompleta">Educación técnica o vocacional
-                                                            incompleta</option>
-                                                        <option value="tecnica_completa">Educación técnica o vocacional
-                                                            completa</option>
-                                                        <option value="universitaria_incompleta">Educación universitaria
-                                                            incompleta</option>
-                                                        <option value="universitaria_completa">Educación universitaria
-                                                            completa
+                                                        <option value="tecnica_incompleta">Educación técnica o vocacional incompleta</option>
+                                                        <option value="tecnica_completa">Educación técnica o vocacional completa</option>
+                                                        <option value="universitaria_incompleta">Educación universitaria incompleta</option>
+                                                        <option value="universitaria_completa">Educación universitaria completa
                                                         </option>
-                                                        <option value="postgrado_incompleto">Postgrado (especialización,
-                                                            maestría, doctorado) incompleto</option>
-                                                        <option value="postgrado_completo">Postgrado (especialización,
-                                                            maestría, doctorado) completo</option>
+                                                        <option value="postgrado_incompleto">Postgrado (especialización,maestría, doctorado) incompleto</option>
+                                                        <option value="postgrado_completo">Postgrado (especialización,maestría, doctorado) completo</option>
                                                     </select>
                                                     @error('mayorGradoInstruccion')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div id="ocupacionPF" class="additional-inputs col-xs-12 col-sm-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label for="ocupacion_Laboral">Ocupación Laboral</label>
+                                                    <input type="text" name="ocupacionLaboral" id="ocupacion_Laboral"
+                                                        autocomplete="off" class="form-control"
+                                                        value="{{ old('ocupacionLaboral') }}">
+                                                    @error('ocupacionLaboral')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
@@ -480,7 +498,7 @@
 
         function disableParentFields() {
             const fields = ["nombrePFS", "ap_paternoPF", "ap_maternoPF", "carnet_PF", "fnacimientoPF", "telPF",
-                "sexo_PF", "correoPF", "rolPadre", "ocupacionPF", "GradoInstruccionPF", "tipo_P_TL"
+                "sexo_PF","direccionPPFF", "correoPF", "rolPadre", "ocupacionPF", "GradoInstruccionPF", "tipo_P_TL"
             ];
             fields.forEach(field => {
                 const element = document.getElementById(field);
@@ -492,7 +510,7 @@
 
         function enableParentFields() {
             const fields = ["nombrePFS", "ap_paternoPF", "ap_maternoPF", "carnet_PF", "fnacimientoPF", "telPF",
-                "sexo_PF", "correoPF", "rolPadre", "ocupacionPF", "GradoInstruccionPF", "tipo_P_TL"
+                "sexo_PF","direccionPPFF", "correoPF", "rolPadre", "ocupacionPF", "GradoInstruccionPF", "tipo_P_TL"
             ];
             fields.forEach(field => {
                 document.getElementById(field).disabled = false;

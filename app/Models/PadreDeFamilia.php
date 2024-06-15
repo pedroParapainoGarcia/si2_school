@@ -22,8 +22,9 @@ class PadreDeFamilia extends Model
       return $this->belongsTo(User::class, 'id');
    }
 
-   public function estudiante()
-   {
-      return $this->hasMany(Estudiante::class, 'padre_id');
-   }
+   public function tutorestudiante()
+    {
+        return $this->hasMany(TutorEstudiante::class, 'tutor_id');
+    }
+   
 }

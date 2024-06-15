@@ -2,47 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Colegio;
 use App\Models\Gestion;
 use App\Models\Nivel;
 use Illuminate\Http\Request;
 
 class NivelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $gestiones = Gestion::all();
         $niveles = Nivel::all();
-        return view('admin.niveles.index', compact('gestiones', 'niveles'));
+        $colegios = Colegio::all();
+        return view('admin.niveles.index', compact('gestiones', 'niveles','colegios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         $gestiones = Gestion::all();
-        return view('admin.niveles.create', compact('gestiones'));
+        $colegios = Colegio::all();
+        return view('admin.niveles.create', compact('gestiones','colegios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'nivel' => 'required',
-            'turno' => 'required',
-            'gestion_id' =>'required'
+            'nombre' => 'required',            
+            'gestion_id' =>'required',
+            'colegio_id'=>'required',
         ]);
 
         $nivel = new Nivel();
 
-        $nivel->nivel = $request->get('nivel');
-        $nivel->turno = $request->get('turno');
+        $nivel->nombre = $request->get('nombre');       
         $nivel->gestion_id = $request->get('gestion_id');
+        $nivel->colegio_id = $request->get('colegio_id');
         $nivel->save();
 
         return redirect()->route('niveles.index')
@@ -50,19 +47,17 @@ class NivelController extends Controller
             ->with('icono', 'success');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show($id)
-    {   
-        $gestion= Gestion::all();
+    {  
+        $gestiones= Gestion::all();
         $nivel = Nivel::findOrFail($id);
-        return view ('admin.niveles.show',compact('gestion','nivel'));
+        $colegio=Colegio::all();
+        return view ('admin.niveles.show',compact('gestiones','nivel','colegio'));
+        //return view('admin.materias.show', compact('materia'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit($id)
     {
         $nivel = Nivel::findOrFail($id);
@@ -70,15 +65,13 @@ class NivelController extends Controller
         return view ('admin.niveles.edit',compact('nivel','gestion'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request,$id)
     {
         $this->validate(request(), [
-            'nivel' => 'required',
-            'turno' => 'required',
-            'gestion_id' =>'required'
+            'nombre' => 'required',            
+            'gestion_id' =>'required',
+            'colegio_id'=>'required',
         ]);
     
         $input= $request->all();
@@ -91,9 +84,7 @@ class NivelController extends Controller
             ->with('icono', 'success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy($id)
     {
         Nivel::destroy($id);

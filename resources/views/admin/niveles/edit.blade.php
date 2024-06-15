@@ -17,39 +17,33 @@
 
                         <div class="row">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Nivel</label>
-                                        <select name="nivel" id="" class="form-control">
-                                            <option value="Primaria" {{ $nivel->nivel == 'Primaria' ? 'selected' : '' }}>
+                                        <select name="nombre" id="" class="form-control">
+                                            <option value="Primaria" {{ $nivel->nombre == 'Primaria' ? 'selected' : '' }}>
                                                 Primaria </option>
-                                            <option value="Secundaria" {{ $nivel->nivel == 'Secundaria' ? 'selected' : '' }}>
+                                            <option value="Secundaria" {{ $nivel->nombre == 'Secundaria' ? 'selected' : '' }}>
                                                 Secundaria </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Turno</label>
-                                        <select name="turno" id="" class="form-control">
-                                            <option value="Mañana" {{ $nivel->turno == 'Mañana' ? 'selected' : '' }}>
-                                                Mañana </option>
-                                            <option value="Tarde" {{ $nivel->turno == 'Tarde' ? 'selected' : '' }}>
-                                                Tarde </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
 
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
                                     {{ Form::label('gestion_id', 'Gestion') }}
                                     {{ Form::select('gestion_id', $gestion, $nivel->gestion_id, ['class' => 'form-control' . ($errors->has('gestion_id') ? ' is-invalid' : '')]) }}
                                     {!! $errors->first('gestion_id', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('colegio_id', 'Colegio') }}
+                                    {{ Form::select('colegio_id', $colegio, $aula->colegio_id, ['class' => 'form-control' . ($errors->has('colegio_id') ? ' is-invalid' : '')]) }}
+                                    {!! $errors->first('colegio_id', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             </div>
                         </div>

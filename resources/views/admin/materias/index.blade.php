@@ -23,10 +23,7 @@
                                 </th>
                                 <th>
                                     <center>Nombre</center>
-                                </th>
-                                <th>
-                                    <center>Docente</center>
-                                </th>
+                                </th>                                 
 
                                 <th>
                                     <center>Acciones</center>
@@ -45,13 +42,7 @@
                                 <tr>
                                     <td style="text-align: center">{{ $materia->id }}</td>
                                     <td> {{ $materia->name }} </td>
-                                    <td>
-                                        @foreach ($docentes as $docente)
-                                            @if ($materia->docente_id == $docente->id)
-                                                <span>{{ $docente->usuario->name . '-' . $docente->usuario->apellidoPaterno }}</span>
-                                            @endif
-                                        @endforeach
-                                    </td>
+                                     
 
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">

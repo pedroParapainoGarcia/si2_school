@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Modificación de datos del Grado de Escolaridad</h1>
+        <h1>Modificación de datos del Curso</h1>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -18,41 +18,41 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="">Curso</label>
-                                    <select name="curso" id="" class="form-control">
-                                        <option value="Primaria-1" {{ $grado->curso == 'Primaria-1' ? 'selected' : '' }}>
-                                            Primaria-1
+                                    <label for="">Grado</label>
+                                    <select name="grado" id="" class="form-control">
+                                        <option value="1° primaria" {{ $grado->grado == '1° primaria' ? 'selected' : '' }}>
+                                            1° primaria
                                         </option>
-                                        <option value="Primaria-2" {{ $grado->curso == 'Primaria-2' ? 'selected' : '' }}>
-                                            Primaria-2 </option>
-                                        <option value="Primaria-3" {{ $grado->curso == 'Primaria-3' ? 'selected' : '' }}>
-                                            Primaria-3
+                                        <option value="2° primaria" {{ $grado->grado == '2° primaria' ? 'selected' : '' }}>
+                                            2° primaria </option>
+                                        <option value="3° primaria" {{ $grado->grado == '3° primaria' ? 'selected' : '' }}>
+                                            3° primaria
                                         </option>
-                                        <option value="Primaria-4" {{ $grado->curso == 'Primaria-4' ? 'selected' : '' }}>
-                                            Primaria-4 </option>
-                                        <option value="Primaria-5" {{ $grado->curso == 'Primaria-5' ? 'selected' : '' }}>
-                                            Primaria-5
+                                        <option value="4° primaria" {{ $grado->grado == '4° primaria' ? 'selected' : '' }}>
+                                            4° primaria </option>
+                                        <option value="5° primaria" {{ $grado->grado == '5° primaria' ? 'selected' : '' }}>
+                                            5° primaria
                                         </option>
-                                        <option value="Primaria-6" {{ $grado->curso == 'Primaria-6' ? 'selected' : '' }}>
-                                            Primaria-6 </option>
-                                        <option value="Secundaria-1"
-                                            {{ $grado->curso == 'Secundaria-1' ? 'selected' : '' }}> Secundaria-1
+                                        <option value="6° primaria" {{ $grado->grado == '6° primaria' ? 'selected' : '' }}>
+                                            6° primaria </option>
+                                        <option value="1° secundaria"
+                                            {{ $grado->grado == '1° secundaria' ? 'selected' : '' }}> 1° secundaria
                                         </option>
-                                        <option value="Secundaria-2"
-                                            {{ $grado->curso == 'Secundaria-2' ? 'selected' : '' }}>
-                                            Secundaria-2 </option>
-                                        <option value="Secundaria-3"
-                                            {{ $grado->curso == 'Secundaria-3' ? 'selected' : '' }}> Secundaria-3
+                                        <option value="2° secundaria"
+                                            {{ $grado->grado == '2° secundaria' ? 'selected' : '' }}>
+                                            2° secundaria </option>
+                                        <option value="3° secundaria"
+                                            {{ $grado->grado == '3° secundaria' ? 'selected' : '' }}> 3° secundaria
                                         </option>
-                                        <option value="Secundaria-4"
-                                            {{ $grado->curso == 'Secundaria-4' ? 'selected' : '' }}>
-                                            Secundaria-4 </option>
-                                        <option value="Secundaria-5"
-                                            {{ $grado->curso == 'Secundaria-5' ? 'selected' : '' }}> Secundaria-5
+                                        <option value="4° secundaria"
+                                            {{ $grado->grado == '4° secundaria' ? 'selected' : '' }}>
+                                            4° secundaria </option>
+                                        <option value="5° secundaria"
+                                            {{ $grado->grado == '5° secundaria' ? 'selected' : '' }}> 5° secundaria
                                         </option>
-                                        <option value="Secundaria-6"
-                                            {{ $grado->curso == 'Secundaria-6' ? 'selected' : '' }}>
-                                            Secundaria-6 </option>
+                                        <option value="6° secundaria"
+                                            {{ $grado->grado == '6° secundaria' ? 'selected' : '' }}>
+                                            6° secundaria </option>
                                     </select>
                                 </div>
                             </div>                         

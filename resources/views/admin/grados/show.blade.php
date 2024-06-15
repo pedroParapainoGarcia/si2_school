@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Datos del Grado de Escolaridad</h1>
+        <h1>Datos del Curso</h1>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">Nombre del Grado de Escolaridad</label>
-                                <p>{{ $grado->curso }}</p>
+                                <label for="">Curso</label>
+                                <p>{{ $grado->grado }}</p>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                                     <label for="">Nivel</label>
                                     @foreach ($nivel as $level)
                                         @if ($grado->nivel_id == $level->id)
-                                            <p>{{ $level->nivel . ' - ' . $level->turno }}</p>
+                                            <p>{{ $level->nombre }}</p>
                                         @endif
                                     @endforeach
                                 </div>

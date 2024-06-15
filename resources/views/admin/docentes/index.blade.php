@@ -11,8 +11,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/usuarios/create', ['tipo' => 'profesor']) }}" class="btn btn-primary"><i
-                                class="bi bi-person-fill-add"></i> Nuevo Docente</a>
+                        <a href="{{ route('usuarios.create', ['tipo' => 'prof.']) }}" class="btn btn-primary">
+                            <i class="bi bi-person-fill-add"></i> Nuevo Docente</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,12 +25,7 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                                <th>
-                                    <center>Apellido Paterno</center>
-                                </th>
-                                <th>
-                                    <center>Apellido Materno</center>
-                                </th>
+                               
                                 <th>
                                     <center>Sexo</center>
                                 </th>
@@ -39,6 +34,9 @@
                                 </th>
                                 <th>
                                     <center>Especialidad</center>
+                                </th>   
+                                <th>
+                                    <center>Nivel Formacion</center>
                                 </th>                                
                                 <th>
                                     <center>Acciones</center>
@@ -55,13 +53,12 @@
                                         // $paralelo = $paralelos->firstWhere('id', $docente->paralelo_id);
                                     @endphp
 
-                                    <td>{{ $usuario ? $usuario->nombre : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoPaterno : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoMaterno : '' }}</td>
+                                    <td>{{ $usuario ? $usuario->apellidoPaterno.' '.$usuario->apellidoMaterno .' '. $usuario->nombre : '' }}</td>                                    
                                     <td>{{ $usuario ? $usuario->sexo : '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
                                     <td>{{ $docente->especialidad }}</td>
-
+                                    <td>{{ $docente->nivelFormacion }}</td>
+                                    
                                     {{-- <td>{{ $paralelo ? $paralelo->grado_escolaridad->name . '-' . $paralelo->sigla : '' }}</td> --}}
 
 

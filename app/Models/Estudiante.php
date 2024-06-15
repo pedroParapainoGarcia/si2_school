@@ -12,8 +12,7 @@ class Estudiante extends Model
     protected $fillable = [
         'nro_rude',
         'nivel_id',
-        'grado_id',
-        'padre_id',       
+        'paralelo_id',         
                 
     ];
     
@@ -27,15 +26,15 @@ class Estudiante extends Model
     {
         return $this->belongsTo(Nivel::class, 'nivel_id');
     } 
-    public function grado()
+    public function paralelo()
     {
-        return $this->belongsTo(Grado::class, 'grado_id');
+        return $this->belongsTo(Paralelo::class, 'paralelo_id');
     }
 
-    public function padreDeFamilia()
+    public function tutorestudiante()
     {
-        return $this->belongsTo(PadreDeFamilia::class, 'padre_id');
+        return $this->hasMany(TutorEstudiante::class, 'estudiante_id');
     }
-
+   
      
 }

@@ -28,6 +28,10 @@
                                 </th>
 
                                 <th>
+                                    <center>Codigo de la Institucion</center>
+                                </th>
+
+                                <th>
                                     <center>Correo de la Institucion</center>
                                 </th>
 
@@ -57,6 +61,7 @@
                                     <td style="text-align: center">{{ $contador }}</td>
 
                                     <td> {{ $colegio->name }} </td>
+                                    <td> {{ $colegio->codigo }} </td>
                                     <td>{{ $colegio->correo }}</td>
                                     <td>{{ $colegio->telefono }}</td>
                                     <td>{{ $colegio->ubicacion }}</td>

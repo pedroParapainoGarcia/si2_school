@@ -9,10 +9,12 @@ use App\Models\Estudiante;
 use App\Models\Grado;
 use App\Models\Nivel;
 use App\Models\PadreDeFamilia;
+use App\Models\Paralelo;
+use App\Models\TutorEstudiante;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -40,8 +42,9 @@ class UsuarioController extends Controller
             case 'Est.':
                 $roles = Role::all();
                 $niveles = Nivel::all();
-                $grados = Grado::all();
-                return view('admin.usuarios.create_estudiante', compact('roles', 'niveles', 'grados'));
+                $paralelos = Paralelo::all();
+                $tutorestudiante = TutorEstudiante::all();
+                return view('admin.usuarios.create_estudiante', compact('roles', 'niveles', 'paralelos', 'tutorestudiante'));
             default:
                 return redirect()->back()->withErrors('Tipo de persona no válido');
         }
@@ -61,10 +64,11 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apellidoPaterno = $request->apellidoPaterno;
         $usuario->apellidoMaterno = $request->apellidoMaterno;
-        $usuario->ci =$request->ci;
+        $usuario->ci = $request->ci;
         $usuario->fechaNacimiento = $request->fechaNacimiento;
         $usuario->telefono = $request->telefono;
         $usuario->sexo = $request->sexo;
+        $usuario->direccion=$request->direccion;
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->ci); // Usar CI como password
         $usuario->save();
@@ -98,13 +102,13 @@ class UsuarioController extends Controller
 
                 $request->validate([
                     'especialidad' => 'required',
-                    'nivelFormacion'=>'required',
+                    'nivelFormacion' => 'required',
                 ]);
 
                 $docente = new Docente();
                 $docente->id = $usuario->id;
                 $docente->especialidad = $request->especialidad;
-                $docente->nivelFormacion=$request->nivelFormacion;
+                $docente->nivelFormacion = $request->nivelFormacion;
                 $docente->save();
 
                 return redirect()->route('docentes.index')
@@ -113,9 +117,9 @@ class UsuarioController extends Controller
                 break;
 
             case '4': // Estudiante
-               
+
                 $this->validateStudent($request);
-                $this->createEstudiante($request, $usuario);               
+                $this->createEstudiante($request, $usuario);
 
                 return redirect()->route('estudiantes.index')
                     ->with('mensaje', 'Se registró al estudiante correctamente')
@@ -137,7 +141,7 @@ class UsuarioController extends Controller
             'email' => 'El campo debe ser un correo electrónico válido.',
             'numeric' => 'El campo debe ser un número.',
             'integer' => 'El campo debe ser un número entero.',
-            'ci'=>'el campo debe ser un ci valido',
+            'ci' => 'el campo debe ser un ci valido',
         ];
 
         $request->validate([
@@ -148,6 +152,7 @@ class UsuarioController extends Controller
             'fechaNacimiento' => 'required|date',
             'telefono' => 'required|numeric',
             'sexo' => 'required|string|max:1',
+            'direccion' => 'required',
             'email' => 'required|string|email|max:255|unique:users,email',
             'roles' => 'required',
         ], $messages);
@@ -156,24 +161,28 @@ class UsuarioController extends Controller
     // Controlador ajustado
     private function createEstudiante(Request $request, User $usuario)
     {
-        $usuario->type = 'Est.';
+        $usuario->type ='Est.';
         $usuario->save();
 
         $estudiante = new Estudiante();
         $estudiante->id = $usuario->id;
         $estudiante->nro_rude = $request->nro_rude;
         $estudiante->nivel_id = $request->nivel_id;
-        $estudiante->grado_id = $request->grado_id;
-        
+        $estudiante->paralelo_id = $request->paralelo_id;
+        $estudiante->save();
+
+        $tutor_estudiante = new TutorEstudiante();
+        $tutor_estudiante->estudiante_id = $estudiante->id;
+
         //dd($request->parent_id);
         if (($request->parent_status === 'yes') && ($request->parent_id)) {
-            $estudiante->padre_id = $request->parent_id;
+            $tutor_estudiante->tutor_id = $request->parent_id;
         } else {
             $padre = $this->createPadreDeFamilia($request);
-            $estudiante->padre_id = $padre->id;
+            $tutor_estudiante->tutor_id = $padre->id;
         }
 
-        $estudiante->save();
+        $tutor_estudiante->save();
     }
 
     private function createPadreDeFamilia(Request $request)
@@ -182,10 +191,11 @@ class UsuarioController extends Controller
         $usuariopf->nombre = $request->namePadres;
         $usuariopf->apellidoPaterno = $request->apellidoPaternoPF;
         $usuariopf->apellidoMaterno = $request->apellidoMaternoPF;
-        $usuariopf->ci =$request->ciPF;
+        $usuariopf->ci = $request->ciPF;
         $usuariopf->fechaNacimiento = $request->fechaNacimientoPF;
         $usuariopf->telefono = $request->telefonoPF;
         $usuariopf->sexo = $request->sexoPF;
+        $usuariopf->direccion=$request->direccionPF;
         $usuariopf->email = $request->emailPF;
         $usuariopf->password = Hash::make($request->ciPF); // O ajustar según la lógica de tu aplicación
         $usuariopf->type = 'PPff.';
@@ -195,7 +205,7 @@ class UsuarioController extends Controller
         $padre->id = $usuariopf->id;
         $padre->ocupacionLaboral = $request->ocupacionLaboral;
         $padre->mayorGradoInstruccion = $request->mayorGradoInstruccion;
-        $padre->tipo=$request->tipo;
+        $padre->tipo = $request->tipo;
         $padre->save();
 
         $usuariopf->assignRole('Padre de Familia');
@@ -207,7 +217,7 @@ class UsuarioController extends Controller
         $rules = [
             'nro_rude' => 'required_if:roles,4|unique:estudiantes,nro_rude',
             'nivel_id' => 'required_if:roles,4',
-            'grado_id' => 'required_if:roles,4',
+            'paralelo_id' => 'required_if:roles,4',
             'parent_status' => 'required|in:yes,no',
 
         ];
@@ -224,6 +234,7 @@ class UsuarioController extends Controller
                 'fechaNacimientoPF' => 'required|date',
                 'telefonoPF' => 'required|numeric',
                 'sexoPF' => 'required|string|max:1',
+                'direccionPF' => 'required',
                 'emailPF' => 'required|string|email|max:255|unique:users,email',
                 // 'rolePadre' => 'required',
 
@@ -238,7 +249,7 @@ class UsuarioController extends Controller
             'email' => 'El campo debe ser un correo electrónico válido.',
             'numeric' => 'El campo debe ser un número.',
             'integer' => 'El campo debe ser un número entero.',
-            'ci'=>'el campo debe ser un ci valido',
+            'ci' => 'el campo debe ser un ci valido',
         ];
 
         $request->validate($rules, $messages);
@@ -294,3 +305,5 @@ class UsuarioController extends Controller
             ->with('icono', 'success');
     }
 }
+
+

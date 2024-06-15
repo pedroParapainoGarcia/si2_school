@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('colegios', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('codigo');
             $table->string('correo');
             $table->string('telefono');
             $table->string('ubicacion');           

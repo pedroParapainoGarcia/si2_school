@@ -26,7 +26,15 @@ class Docente extends Model
         return $this->hasMany(Materia::class, 'docente_id');
     }    
     
+    public function paralelo()
+    {
+        return $this->hasMany(Paralelo::class, 'docente_id');
+    }
     
+    public function asignacionmateria()
+    {
+        return $this->hasMany(AsignacionMateria::class, 'docente_id');
+    }
      
     
 }

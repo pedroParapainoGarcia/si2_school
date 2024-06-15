@@ -22,6 +22,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label for="">Codigo de la Institucion</label>
+                                <p>{{ $colegio->codigo }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label for="">Correo de la Institucion</label>
                                 <p>{{ $colegio->correo }}</p>
                             </div>

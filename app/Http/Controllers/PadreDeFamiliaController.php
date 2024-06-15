@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PadreDeFamilia;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PadreDeFamiliaController extends Controller
@@ -12,7 +13,10 @@ class PadreDeFamiliaController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all();       
+        $tutores = PadreDeFamilia::all();
+
+        return view('admin.tutores.index', compact('usuarios','tutores'));
     }
 
     /**

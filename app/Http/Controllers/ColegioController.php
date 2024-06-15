@@ -13,9 +13,7 @@ use Spatie\Permission\Models\Role;
 
 class ColegioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+     
     public function index()
     {
         $colegios = Colegio::all();
@@ -23,21 +21,18 @@ class ColegioController extends Controller
         return view('admin.colegios.index', compact('colegios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+     
     public function create()
     {
         return view('admin.colegios.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+     
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
+            'codigo'=> 'required',
             'correo' => 'required',
             'telefono' => 'required',
             'ubicacion' => 'required',
@@ -45,6 +40,7 @@ class ColegioController extends Controller
 
         $colegio = new Colegio();
         $colegio->name = $request->name;
+        $colegio->codigo = $request->codigo;
         $colegio->correo = $request->correo;
         $colegio->telefono = $request->telefono;
         $colegio->ubicacion = $request->ubicacion;
@@ -55,31 +51,26 @@ class ColegioController extends Controller
             ->with('icono', 'success');
     }
 
-    /**
-     * Display the specified resource.
-     */
+     
     public function show($id)
     {
         $colegio = Colegio::findOrFail($id);
         return view('admin.colegios.show', ['colegio' => $colegio]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+     
     public function edit($id)
     {
         $colegio = Colegio::findOrFail($id);
         return view('admin.colegios.edit',compact('colegio'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+     
     public function update(Request $request, $id)
     {
         $this->validate($request,[
             'name' => 'required',
+            'codigo' => 'required',
             'correo' => 'required',
             'telefono' => 'required',
             'ubicacion' => 'required',
@@ -96,9 +87,7 @@ class ColegioController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy($id)
     {
         Colegio::destroy($id);

@@ -9,7 +9,7 @@ class Grado extends Model
 {
     use HasFactory;
     protected $fillable = [    
-        'curso',       
+        'grado',       
         'nivel_id',       
     ]; 
 
@@ -17,11 +17,7 @@ class Grado extends Model
     {
         return $this->belongsTo(Nivel::class, 'nivel_id');
     }
-
-    public function estudiante()
-    {
-        return $this->hasMany(Estudiante::class, 'grado_id');
-    }
+    
 
     public function paralelo()
     {

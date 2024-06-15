@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Grado;
 use App\Models\Nivel;
+use App\Models\Paralelo;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,10 @@ class EstudianteController extends Controller
     {
         $usuarios = User::all();
         $niveles = Nivel::all();
-        $grados = Grado::all();
+        $paralelos = Paralelo::all();
         $estudiantes = Estudiante::all();
 
-        return view('admin.estudiantes.index', compact('usuarios','niveles','grados','estudiantes'));
+        return view('admin.estudiantes.index', compact('usuarios','niveles','paralelos','estudiantes'));
     }
 
     /**

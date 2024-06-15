@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ocupacionLaboral');
             $table->string('mayorGradoInstruccion');
             $table->enum('tipo', ['PF', 'TL']); // Campo enum para el tipo de tutor
-            $table->boolean('estado')->default(false); // Campo para el estado
+            //$table->boolean('estado')->default(false); // Campo para el estado
             $table->unique('id');
             $table->timestamps();
         });

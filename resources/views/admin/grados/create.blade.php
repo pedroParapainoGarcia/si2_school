@@ -17,19 +17,19 @@
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
                                     <label for="">Curso</label>
-                                    <select name="curso" id="" class="form-control">
-                                        <option value="Primaria-1">Primaria-1</option>
-                                        <option value="Primaria-2">Primaria-2</option>
-                                        <option value="Primaria-3">Primaria-3</option>
-                                        <option value="Primaria-4">Primaria-4</option>
-                                        <option value="Primaria-5">Primaria-5</option>
-                                        <option value="Primaria-6">Primaria-6</option>
-                                        <option value="Secundaria-1">Secundaria-1</option>
-                                        <option value="Secundaria-2">Secundaria-2</option>
-                                        <option value="Secundaria-3">Secundaria-3</option>
-                                        <option value="Secundaria-4">Secundaria-4</option>
-                                        <option value="Secundaria-5">Secundaria-5</option>
-                                        <option value="Secundaria-6">Secundaria-6</option>
+                                    <select name="grado" id="" class="form-control">
+                                        <option value="1° primaria">1° primaria</option>
+                                        <option value="2° primaria">2° primaria</option>
+                                        <option value="3° primaria">3° primaria</option>
+                                        <option value="4° primaria">4° primaria</option>
+                                        <option value="5° primaria">5° primaria</option>
+                                        <option value="6° primaria">6° primaria</option>
+                                        <option value="1° secundaria">1° secundaria</option>
+                                        <option value="2° secundaria">2° secundaria</option>
+                                        <option value="3° secundaria">3° secundaria</option>
+                                        <option value="4° secundaria">4° secundaria</option>
+                                        <option value="5° secundaria">5° secundaria</option>
+                                        <option value="6° secundaria">6° ecundaria</option>
                                     </select>
                                 </div>
                             </div>                           
@@ -40,7 +40,7 @@
                                     <label for="nivel_id">Nivel</label>
                                     <select required class="form-control" name="nivel_id" id="nivel_id">
                                         @foreach ($niveles as $nivel)
-                                            <option value="{{ $nivel->id }}">{{ $nivel->nivel . ' - ' . $nivel->turno }}</option>
+                                            <option value="{{ $nivel->id }}">{{ $nivel->nombre}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -13,4 +13,19 @@ class AsignacionMateria extends Model
        'docente_id',
        'materia_id',
     ];
+
+    public function docente()
+    {
+        return $this->belongsTo(Docente::class, 'docente_id');
+    }
+
+    public function materia()
+    {
+        return $this->belongsTo(Materia::class, 'materia_id');
+    }
+
+    public function horario()
+    {
+        return $this->hasMany(Horario::class, 'docentemateria_id');
+    }
 }

@@ -16,22 +16,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="">Nivel</label>
+                                    <label for="">Nombre de Nivel</label>
                                     <select name="nivel" id="" class="form-control">
                                         <option value="Primaria">Primaria</option>
                                         <option value="Secundaria">Secundaria</option>
-                                    </select>
-
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-12 col-sm-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="">Turno</label>
-                                    <select name="turno" id="" class="form-control">
-                                        <option value="Mañana">Mañana</option>
-                                        <option value="Tarde">Tarde</option>
                                     </select>
 
                                 </div>
@@ -43,6 +31,17 @@
                                     <select required class="form-control" name="gestion_id" id="gestion_id">
                                         @foreach ($gestiones as $gestion)
                                             <option value="{{ $gestion->id }}">{{ $gestion->nombreGestion }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="colegio_id">Colegio</label>
+                                    <select required class="form-control" name="colegio_id" id="colegio_id">
+                                        @foreach ($colegios as $colegio)
+                                            <option value="{{ $colegio->id }}">{{ $colegio->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

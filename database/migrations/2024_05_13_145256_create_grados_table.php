@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('grados', function (Blueprint $table) {
             $table->id();
-            $table->string('curso');          
+            $table->string('grado');          
             $table->foreignId('nivel_id')
                 ->constrained('nivels')
                 ->onUpdate('cascade')

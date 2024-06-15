@@ -19,6 +19,10 @@ return new class extends Migration
                 ->constrained('grados')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('docente_id')
+                ->constrained('docentes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

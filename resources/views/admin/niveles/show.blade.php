@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Datos del Aula</h1>
+        <h1>Datos del Nivel</h1>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -14,37 +14,42 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">Capacidad del Aula</label>
-                                <p>{{ $aula->capacidad }}</p>
+                                <label for="">Nombre del Nivel</label>
+                                <p>{{ $nivel->nombre }}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Tipo de Aula</label>
-                                <p>{{ $aula->tipo }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Colegio</label>
-                                @foreach ($colegio as $cole)
-                                @if ($aula->id_colegio == $cole->id)
-                                    <span>{{ $cole->name }}</span>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Gestion</label>
+                            @foreach ($gestiones as $gestion)
+                                @if ($nivel->gestion_id == $gestion->id)
+                                    <p>{{ $gestion->nombreGestion }}</p>
                                 @endif
                             @endforeach
-                            </div>
                         </div>
                     </div>
+
+
+                    <div class="col-md-3">
+
+                        <div class="form-group">
+                            <label for="">Colegio</label>
+                            @foreach ($colegio as $cole)
+                                @if ($aula->colegio_id == $cole->id)
+                                    <p>{{ $cole->name }}</p>
+                                @endif
+                            @endforeach
+                        </div>
+
+                    </div>
+
 
 
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="{{ url('admin/aulas') }}" class="btn btn-secondary">Volver</a>
+                            <a href="{{ url('admin/niveles') }}" class="btn btn-secondary">Volver</a>
                         </div>
                     </div>
 

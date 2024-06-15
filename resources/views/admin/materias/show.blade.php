@@ -19,17 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Docente que Imparte la Materia</label>
-                                <p>{{ $docente->usuario->name . '-' . $docente->usuario->apellidoPaterno }}</p>
-                            </div>
-                        </div>
-                    </div>
                    
-
-
                     <hr>
                     <div class="row">
                         <div class="col-md-12">

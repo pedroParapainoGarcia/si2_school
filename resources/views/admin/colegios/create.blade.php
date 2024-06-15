@@ -28,6 +28,18 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="">Codigo del colegio</label>
+                                    <input type="text" value="{{ old('codigo') }}" name="codigo" class="form-control"
+                                        required>
+                                    @error('codigo')
+                                        <small style="color: red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="">Correo</label>
                                     <input type="text" value="{{ old('correo') }}" name="correo" class="form-control"
                                         required>

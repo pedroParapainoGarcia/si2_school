@@ -10,13 +10,12 @@ class Materia extends Model
     use HasFactory;
     protected $fillable = [    
         'name',
-        'tipo',
-        'docente_id',
+         
     ];
-
-    public function docente()
+    
+    public function asignacionmateria()
     {
-        return $this->belongsTo(Docente::class, 'docente_id');
+        return $this->hasMany(AsignacionMateria::class, 'materia_id');
     }
      
 }

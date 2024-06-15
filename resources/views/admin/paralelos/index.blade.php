@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1 class="agenda-escolar">Listado de Grados de Escolaridad</h1>
+        <h1 class="agenda-escolar">Listado de Paralelos</h1>
     </div>
     <hr>
     <div class="row">
@@ -11,8 +11,18 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/grados/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Grado Escolar</a>
+                        <a href="{{ url('/admin/paralelos/create') }}" class="btn btn-primary"><i
+                                class="fas fa-plus-circle"></i> Nuevo Paralelo</a>
                     </div>
+                    {{-- <div class="card-tools"> --}}
+                    {{-- <a class="btn btn-danger mb-3" href="{{ url('/admin/paralelos/report')}}">Generar Reporte <i class="fas fa-file-pdf ml-2"></i></a> --}}
+
+
+
+
+
+
+                    {{-- </div> --}}
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-sm table-striped table-hover">
@@ -23,10 +33,18 @@
                                 </th>
 
                                 <th>
-                                    <center>Curso</center>
-                                </th>                                
+                                    <center>Nombre</center>
+                                </th>
                                 <th>
-                                    <center>Nivel</center>
+                                    <center>Cupo</center>
+                                </th>
+
+                                <th>
+                                    <center>Curso</center>
+                                </th>
+
+                                <th>
+                                    <center>Tutor</center>
                                 </th>
 
                                 <th>
@@ -35,14 +53,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($grados as $grado)
+                            @foreach ($paralelos as $paralelo)
                                 <tr>
-                                    <td style="text-align: center">{{ $grado->id }}</td>
-                                    <td> {{ $grado->curso }} </td>                                    
+                                    <td style="text-align: center">{{ $paralelo->id }}</td>
+                                    <td> {{ $paralelo->nombre }} </td>
+                                    <td> {{ $paralelo->cupo }} </td>
                                     <td>
-                                        @foreach ($niveles as $nivel)
-                                            @if ($grado->nivel_id == $nivel->id)
-                                                <span>{{ $nivel->nivel . ' - ' . $nivel->turno }}</span>
+                                        @foreach ($grados as $grado)
+                                            @if ($paralelo->grado_id == $grado->id)
+                                                <span>{{ $grado->grado }}</span>
+                                            @endif
+                                        @endforeach
+                                    </td>
+
+                                    <td>
+                                        @foreach ($docentes as $docente)
+                                            @if ($paralelo->docente_id == $docente->id)
+                                                <span>{{ $docente->usuario->nombre . ' ' . $docente->usuario->apellidoPaterno }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -50,15 +77,18 @@
 
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('grados.show', $grado->id) }}" type="button"
+                                            <a href="{{ route('paralelos.generatePDF', $paralelo->id) }}" type="button"
+                                                class="btn btn-danger">Reporte <i class="fas fa-file-pdf ml-2"></i></a>
+
+                                            <a href="{{ route('paralelos.show', $paralelo->id) }}" type="button"
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('grados.edit', $grado->id) }}" type="button"
+                                            <a href="{{ route('paralelos.edit', $paralelo->id) }}" type="button"
                                                 class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('grados.destroy', $grado->id) }}"
-                                                onclick="preguntar{{ $grado->id }}(event)"
-                                                method="post"id="miFormulario{{ $grado->id }}">
+                                            <form action="{{ route('paralelos.destroy', $paralelo->id) }}"
+                                                onclick="preguntar{{ $paralelo->id }}(event)"
+                                                method="post"id="miFormulario{{ $paralelo->id }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger"
@@ -79,7 +109,7 @@
                                                         denyButtonText: 'Cancelar',
                                                     }).then((result) => {
                                                         if (result.isConfirmed) {
-                                                            var form = $('#miFormulario'+id);
+                                                            var form = $('#miFormulario' + id);
                                                             form.submit();
                                                         }
                                                     });

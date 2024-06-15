@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1 class="agenda-escolar">Listado de Grados de Escolaridad</h1>
+        <h1 class="agenda-escolar">Listado de Cursos</h1>
     </div>
     <hr>
     <div class="row">
@@ -11,11 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/grados/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Grado Escolar</a>
+                        <a href="{{ url('/admin/grados/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Curso</a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-sm table-striped table-hover">
+                    <table id="cursos" class="table table-bordered table-sm table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>
@@ -23,7 +23,7 @@
                                 </th>
 
                                 <th>
-                                    <center>Curso</center>
+                                    <center>Grado</center>
                                 </th>                                
                                 <th>
                                     <center>Nivel</center>
@@ -38,11 +38,11 @@
                             @foreach ($grados as $grado)
                                 <tr>
                                     <td style="text-align: center">{{ $grado->id }}</td>
-                                    <td> {{ $grado->curso }} </td>                                    
+                                    <td> {{ $grado->grado }} </td>                                    
                                     <td>
                                         @foreach ($niveles as $nivel)
                                             @if ($grado->nivel_id == $nivel->id)
-                                                <span>{{ $nivel->nivel . ' - ' . $nivel->turno }}</span>
+                                                <span>{{ $nivel->nombre }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -96,3 +96,47 @@
         </div>
     </div>
 @endsection
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+@stop
+
+@section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#cursos').DataTable({
+            responsive: true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " + 
+                `<select>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                    <option value='25'>25</option>
+                    <option value='50'>50</option>
+                    <option value='100'>100</option>
+                    <option value='-1'>Todos</option>
+                </select>` + 
+                " registros por página",
+                "zeroRecords": "Nada encontrado - disculpa",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
+                }
+            },
+            "paging": true, // Activar paginación
+            "pageLength": 10, // Número de registros por página
+        });
+    });
+</script>
+@stop

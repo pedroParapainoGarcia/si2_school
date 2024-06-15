@@ -10,11 +10,21 @@ class Colegio extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'codigo',
         'correo',
         'Telefono',        
         'ubicacion',       
     ];  
+
+    public function aula()
+    {
+        return $this->hasMany(Aula::class, 'colegio_id');
+    }
      
+    public function nivel()
+    {
+        return $this->hasMany(Nivel::class, 'colegio_id');
+    }
     
     
 }

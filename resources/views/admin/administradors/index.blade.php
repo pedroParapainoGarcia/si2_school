@@ -25,23 +25,22 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                                <th>
-                                    <center>Apellido Paterno</center>
-                                </th>
-                                <th>
-                                    <center>Apellido Materno</center>
-                                </th>
+                                
                                 <th>
                                     <center>Nro. Ci</center>
                                 </th>
                                 <th>
-                                    <center>Fecha Nacimiento</center>
+                                    <center>Fecha Nac.</center>
                                 </th>
                                 <th>
                                     <center>Telefono</center>
                                 </th>
                                 <th>
                                     <center>Sexo</center>
+                                </th>
+
+                                <th>
+                                    <center>DIRECCION</center>
                                 </th>
 
                                 <th>
@@ -64,15 +63,14 @@
                                         $usuario = $usuarios->firstWhere('id', $admin->id);
                                         $colegio = $colegios->firstWhere('id', $admin->colegio_id);
                                     @endphp
-
-                                    <td>{{ $usuario ? $usuario->nombre : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoPaterno : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->apellidoMaterno : '' }}</td>
+                                    <td>{{ $usuario ? $usuario->nombre . ' ' . $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno : '' }}</td>
                                     <td>{{ $usuario ? $usuario->ci : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->fechaNacimiento: '' }}</td>
+                                    <td>{{ $usuario ? $usuario->fechaNacimiento : '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
                                     <td>{{ $usuario ? $usuario->sexo : '' }}</td>
-                                    
+                                    <td>{{ $usuario ? $usuario->direccion: '' }}</td>
+
+
                                     <td>{{ $admin->cargo }}</td>
 
                                     <td>{{ $colegio ? $colegio->name : '' }}</td>

@@ -28,6 +28,17 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-6">
                                 <div class="form-group">
+                                    <label for="">Codigo del colegio</label>
+                                    <input type="text" value="{{$colegio->codigo}}" name="codigo" 
+                                    class="form-control" required>
+                                    @error('codigo')
+                                    <small style="color: red">{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="form-group">
                                     <label for="">Correo </label>
                                     <input type="text" value="{{$colegio->correo}}" name="correo" 
                                     class="form-control" required>

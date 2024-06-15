@@ -10,8 +10,7 @@ class Nivel extends Model
     use HasFactory;
 
     protected $fillable = [    
-        'nivel',
-        'turno',
+        'nombre',        
         'gestion_id',       
     ];
 
@@ -28,5 +27,10 @@ class Nivel extends Model
     public function estudiante()
     {
         return $this->hasMany(Estudiante::class, 'nivel_id');
+    }
+
+    public function colegio()
+    {
+        return $this->belongsTo(Colegio::class, 'colegio_id');
     }
 }

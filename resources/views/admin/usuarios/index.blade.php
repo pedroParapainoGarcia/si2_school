@@ -29,6 +29,9 @@
                                     <center>Email</center>
                                 </th>
                                 <th>
+                                    <center>Ci</center>
+                                </th>
+                                <th>
                                     <center>Rol</center>
                                 </th>
                                 <th>
@@ -51,9 +54,10 @@
                                     <td style="text-align: center">{{ $contador }}</td>
 
                                     <td>
-                                        <span>{{ $usuario->nombre }}</span>
+                                        <span>{{ $usuario->nombre.' '.$usuario->apellidoPaterno.' '.$usuario->apellidoMaterno }}</span>
                                     </td>
                                     <td>{{ $usuario->email }}</td>
+                                    <td>{{ $usuario->ci }}</td>
 
                                     <td>
                                         @if (!empty($usuario->getRoleNames()))

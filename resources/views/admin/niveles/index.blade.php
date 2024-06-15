@@ -22,13 +22,14 @@
                                     <center>Id</center>
                                 </th>
                                 <th>
-                                    <center>Nivel</center>
+                                    <center>Nombre Nivel</center>
                                 </th>
-                                <th>
-                                    <center>Turno</center>
-                                </th>
+                                
                                 <th>
                                     <center>Gestion</center>
+                                </th>
+                                <th>
+                                    <center>Colegio</center>
                                 </th>
                                 <th>
                                     <center>Acciones</center>
@@ -45,12 +46,18 @@
                                 @endphp
                                 <tr>
                                     <td style="text-align: center">{{ $nivel->id }}</td>
-                                    <td> {{ $nivel->nivel }} </td>
-                                    <td>{{ $nivel->turno }}</td>
+                                    <td> {{ $nivel->nombre }} </td>                                    
                                     <td>
                                         @foreach ($gestiones as $gestion)
                                             @if ($nivel->gestion_id == $gestion->id)
                                                 <span>{{ $gestion->nombreGestion }}</span>
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($colegios as $colegio)
+                                            @if ($aula->colegio_id == $colegio->id)
+                                                <span>{{ $colegio->name }}</span>
                                             @endif
                                         @endforeach
                                     </td>

@@ -25,17 +25,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="docente_id">Docente</label>
-                                    <select required class="form-control" name="docente_id" id="docente_id">
-                                        @foreach ($docentes as $docente)
-                                            <option value="{{ $docente->id }}">{{ $docente->usuario->name . '-' . $docente->usuario->apellidoPaterno}}</option>
-                                          
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                           
                         </div>
                         <hr>
                         <div class="row">
