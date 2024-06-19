@@ -21,6 +21,16 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
+
+    public function _construct()
+    {
+
+        $this->middleware('can:usuarios.index')->only('index','show');
+        $this->middleware('can:usuarios.create')->only('create', 'store');
+        $this->middleware('can:usuarios.edit')->only('edit', 'update');
+        $this->middleware('can:usuarios.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $usuarios = User::with('roles')->get();
@@ -305,6 +315,4 @@ class UsuarioController extends Controller
             ->with('mensaje', 'Se eliminó al usuario de la manera correcta')
             ->with('icono', 'success');
     }
-
-    
 }

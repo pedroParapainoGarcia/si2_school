@@ -16,6 +16,14 @@ use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
+    public function _construct()
+    {
+
+        $this->middleware('can:horarios.index')->only('index','show');
+        $this->middleware('can:horarios.create')->only('create', 'store');
+        $this->middleware('can:horarios.edit')->only('edit', 'update');
+        $this->middleware('can:horarios.destroy')->only('destroy');
+    }
 
     public function index()
     {

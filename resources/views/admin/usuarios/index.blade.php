@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/usuarios/create') }}" class="btn btn-primary"><i
-                                class="bi bi-person-fill-add"></i> Nuevo usuario</a>
+                        @can('usuarios.create')
+                            <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="bi bi-person-fill-add"></i>
+                                Nuevo usuario</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -65,7 +68,7 @@
                                             <span>{{ $rol->name }}</span><br>
                                         @endforeach
                                     </td>
-                                    
+
                                     <td>{{ $usuario->type }}</td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -73,17 +76,22 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('usuarios.edit', $usuario->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('usuarios.destroy', $usuario->id) }}"
-                                                onclick="preguntar<?= $id ?>(event)" method="post"
-                                                id="miFormulario<?= $id ?>">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('usuarios.edit')
+                                                <a href="{{ route('usuarios.edit', $usuario->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('usuarios.destroy')
+                                                <form action="{{ route('usuarios.destroy', $usuario->id) }}"
+                                                    onclick="preguntar<?= $id ?>(event)" method="post"
+                                                    id="miFormulario<?= $id ?>">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar<?= $id ?>(event) {
                                                     event.preventDefault();
@@ -117,58 +125,57 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
 @stop
 
 @section('js')
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap5.min.js"></script>
 
 
 
-<!-- SUM()  Datatables-->
-<script src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
+    <!-- SUM()  Datatables-->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
 
-<script>
-    $(document).ready(function() {
-    $('#users').DataTable({
-        
-        responsive: true,
-        autoWidth: false,
-        "language": {
-            "lengthMenu": "Mostrar" + 
-            `<select>
+    <script>
+        $(document).ready(function() {
+            $('#users').DataTable({
+
+                responsive: true,
+                autoWidth: false,
+                "language": {
+                    "lengthMenu": "Mostrar" +
+                        `<select>
                 <option value = '5'>5</option>
                 <option value = '10'>10</option>
                 <option value = '25'>25</option>
                 <option value='100'>100</option>
                 <option value='-1'>All</option>
-                </select>` +            
-            "registros por página",
-            "zeroRecords": "Nada encontrado - disculpa",
-            "info": "Mostrando la página _PAGE_ de _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtrando de _MAX_ registros totales)",
-            'search': 'Buscar:',
-            'paginate':{
-                'next':'Siguiente',
-                'previous':'Anterior'
-            }
-        },
-        
-        
-    });  
+                </select>` +
+                        "registros por página",
+                    "zeroRecords": "Nada encontrado - disculpa",
+                    "info": "Mostrando la página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No records available",
+                    "infoFiltered": "(filtrando de _MAX_ registros totales)",
+                    'search': 'Buscar:',
+                    'paginate': {
+                        'next': 'Siguiente',
+                        'previous': 'Anterior'
+                    }
+                },
 
- 
+
+            });
 
 
 
-} ); 
 
-</script>
+
+        });
+    </script>
 
 @stop

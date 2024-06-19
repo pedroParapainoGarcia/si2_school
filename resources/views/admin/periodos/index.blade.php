@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/periodos/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
-                            Nuevo Periodo</a>
+                        @can('periodos.create')
+                            <a href="{{ route('periodos.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nuevo Periodo</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,7 +28,7 @@
 
                                 <th>
                                     <center>Nombre del Periodo</center>
-                                </th>                                
+                                </th>
                                 <th>
                                     <center>Acciones</center>
                                 </th>
@@ -43,7 +46,7 @@
                                 <tr>
                                     <td style="text-align: center">{{ $contador }}</td>
 
-                                    <td> {{ $periodo->nombre }} </td>                                   
+                                    <td> {{ $periodo->nombre }} </td>
 
 
                                     <td style="text-align:center">
@@ -52,17 +55,21 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('periodos.edit', $periodo->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('periodos.destroy', $periodo->id) }}"
-                                                onclick="preguntar{{ $periodo->id }}(event)"
-                                                method="post"id="miFormulario{{ $periodo->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('periodos.edit')
+                                                <a href="{{ route('periodos.edit', $periodo->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('periodos.destroy')
+                                                <form action="{{ route('periodos.destroy', $periodo->id) }}"
+                                                    onclick="preguntar{{ $periodo->id }}(event)"
+                                                    method="post"id="miFormulario{{ $periodo->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

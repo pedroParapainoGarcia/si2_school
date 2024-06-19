@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class NivelController extends Controller
 {
+    public function _construct()
+    {
+
+        $this->middleware('can:niveles.index')->only('index','show');
+        $this->middleware('can:niveles.create')->only('create', 'store');
+        $this->middleware('can:niveles.edit')->only('edit', 'update');
+        $this->middleware('can:niveles.destroy')->only('destroy');
+    }
    
     public function index()
     {

@@ -11,11 +11,12 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/paralelos/create') }}" class="btn btn-primary"><i
-                                class="fas fa-plus-circle"></i> Nuevo Paralelo</a>
+                        @can('paralelos.create')
+                            <a href="{{ url('paralelos.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nuevo Paralelo</a>
+                        @endcan
+
                     </div>
-                    {{-- <div class="card-tools"> --}}
-                    {{-- <a class="btn btn-danger mb-3" href="{{ url('/admin/paralelos/report')}}">Generar Reporte <i class="fas fa-file-pdf ml-2"></i></a> --}}
 
 
 
@@ -78,23 +79,29 @@
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('paralelos.generatePDF', $paralelo->id) }}" type="button"
-                                                class="btn btn-danger" target="_blank">Reporte <i class="fas fa-file-pdf ml-2"></i></a>
+                                                class="btn btn-danger" target="_blank">Reporte <i
+                                                    class="fas fa-file-pdf ml-2"></i></a>
 
                                             <a href="{{ route('paralelos.show', $paralelo->id) }}" type="button"
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('paralelos.edit', $paralelo->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('paralelos.destroy', $paralelo->id) }}"
-                                                onclick="preguntar{{ $paralelo->id }}(event)"
-                                                method="post"id="miFormulario{{ $paralelo->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('paralelos.edit')
+                                                <a href="{{ route('paralelos.edit', $paralelo->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('paralelos.destroy')
+                                                <form action="{{ route('paralelos.destroy', $paralelo->id) }}"
+                                                    onclick="preguntar{{ $paralelo->id }}(event)"
+                                                    method="post"id="miFormulario{{ $paralelo->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

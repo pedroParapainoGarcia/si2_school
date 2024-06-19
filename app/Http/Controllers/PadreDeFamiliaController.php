@@ -8,15 +8,18 @@ use Illuminate\Http\Request;
 
 class PadreDeFamiliaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:tutores.index')->only('index');
+    }
+
     public function index()
     {
-        $usuarios = User::all();       
+        $usuarios = User::all();
         $tutores = PadreDeFamilia::all();
 
-        return view('admin.tutores.index', compact('usuarios','tutores'));
+        return view('admin.tutores.index', compact('usuarios', 'tutores'));
     }
 
     /**

@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class IntervaloController extends Controller
 {
+    public function _construct()
+    {
+
+        $this->middleware('can:intervalos.index')->only('index','show');
+        $this->middleware('can:intervalos.create')->only('create', 'store');
+        $this->middleware('can:intervalos.edit')->only('edit', 'update');
+        $this->middleware('can:intervalos.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $intervalos = Intervalo::all();

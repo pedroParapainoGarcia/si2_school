@@ -34,12 +34,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Custom CSS -->
     {{-- <link rel="stylesheet" href="/dist/css/agenda-escolar.css"> --}}
     {{-- <link rel="stylesheet" href="{{ '/dist/css/tarjetas.css' }}"> --}}
-    
+
 
     @yield('styles')
 
 
-    
+
 
 
 </head>
@@ -56,9 +56,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/') }}" class="nav-link">
+                    {{-- <a href="{{ url('/') }}" class="nav-link">
+                        <h1 class="agenda-escolar">Sistema Gestion Educativa</h1>
+                    </a> --}}
+
+                    <a href="{{ route('admin.index') }}" class="nav-link">
                         <h1 class="agenda-escolar">Sistema Gestion Educativa</h1>
                     </a>
+
+
                 </li>
             </ul>
 
@@ -87,7 +93,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link">
+
+
+            <a href="{{ route('admin.index') }}" class="brand-link">
                 <img src="{{ asset('dist/img/SGE_WHITE.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">
@@ -127,10 +135,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/usuarios') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de usuarios</p>
-                                    </a>
+                                    @can('usuarios.index')
+                                        <a href="{{ route('usuarios.index') }}" class="nav-link active"><i
+                                                class="far fa-circle nav-icon"></i>
+                                            <p>Listado de usuarios</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
@@ -145,10 +155,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/roles') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de roles</p>
-                                    </a>
+                                    @can('roles.index')
+                                        <a href="{{ route('roles.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de roles</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
@@ -166,19 +178,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/configuraciones') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>configurar</p>
-                                    </a>
+                                    @can('configuraciones.index')
+                                        <a href="{{ route('configuraciones.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>configurar</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/aulas') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>lista de aulas</p>
-                                    </a>
+                                    @can('aulas.index')
+                                        <a href="{{ route('aulas.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>lista de aulas</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
@@ -187,19 +203,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-arrow-alt-circle-up"></i>
-
-                                <p>
-                                    Gestionar Niveles
-
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                                <p>Gestionar Niveles<i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/niveles') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de niveles</p>
-                                    </a>
+                                    @can('niveles.index')
+                                        <a href="{{ route('niveles.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de niveles</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
@@ -217,19 +230,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/grados') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de cursos</p>
-                                    </a>
+                                    @can('grados.index')
+                                        <a href="{{ route('grados.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de cursos</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/paralelos') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de paralelos</p>
-                                    </a>
+                                    @can('paralelos.index')
+                                        <a href="{{ route('paralelos.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de paralelos</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
@@ -246,10 +263,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/administradors') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de adm.</p>
-                                    </a>
+                                    @can('administradors.index')
+                                        <a href="{{ route('administradors.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de adm.</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
@@ -265,19 +284,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/docentes') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de Docentes</p>
-                                    </a>
+                                    @can('docentes.index')
+                                        <a href="{{ route('docentes.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de Docentes</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/asignacionmaterias') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Asignacion Materias</p></p>
-                                    </a>
+                                    @can('asignacionmaterias.index')
+                                        <a href="{{ route('asignacionmaterias.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Asignacion Materias</p>
+                                            </p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
@@ -294,16 +318,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/materias') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de Materias</p>
-                                    </a>
+                                    @can('materias.index')
+                                        <a href="{{ route('materias.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de Materias</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">                                
+                            <a href="#" class="nav-link active">
                                 <i class="fas fa-clipboard-check"></i>
                                 <p>
                                     Gestionar Horario
@@ -312,34 +338,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/dias') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de dias</p>
-                                    </a>
+                                    @can('dias.index')
+                                        <a href="{{ route('dias.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de dias</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/periodos') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de periodos</p>
-                                    </a>
+                                    @can('periodos.index')
+                                        <a href="{{ route('periodos.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de periodos</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/intervalos') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de Intervalos </p>
-                                    </a>
+                                    @can('intervalos.index')
+                                        <a href="{{ route('intervalos.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de Intervalos </p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/horarios') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de Horarios </p>
-                                    </a>
+                                    @can('horarios.index')
+                                        <a href="{{ route('horarios.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Listado de Horarios </p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                         </li>
@@ -355,36 +389,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/inscripciones') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>inscribir</p>
-                                    </a>
+                                    @can('inscripciones.index')
+                                        <a href="{{ route('inscripciones.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>inscribir</p>
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/estudiantes') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de estudiantes</p>
-                                    </a>
+                                    @can('estudiantes.index')
+                                        <a href="{{ route('estudiantes.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de estudiantes</p>
+                                        </a>
+                                    @endcan
                                 </li>
-                            </ul> 
+                            </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/tutores') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de tutores</p>
-                                    </a>
+                                    @can('tutores.index')
+                                        <a href="{{ route('tutores.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de tutores</p>
+                                        </a>
+                                    @endcan
                                 </li>
-                            </ul> 
+                            </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin/tutorestudiantes') }}" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>listado de tutor/est.</p>
-                                    </a>
+                                    @can('tutorestudiantes.index')
+                                        <a href="{{ route('tutorestudiantes.index') }}" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>listado de tutor/est.</p>
+                                        </a>
+                                    @endcan
                                 </li>
-                            </ul> 
+                            </ul>
                         </li>
                         @guest
                             @if (Route::has('login'))

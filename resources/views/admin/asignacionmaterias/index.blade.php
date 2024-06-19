@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/asignacionmaterias/create') }}" class="btn btn-primary"><i
-                                class="fas fa-plus-circle"></i> Nueva Asignacion</a>
+                        @can('asignacionmaterias.create')
+                            <a href="{{ route('asignacionmaterias.create') }}" class="btn btn-primary"><i
+                                    class="fas fa-plus-circle"></i> Nueva Asignacion</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -42,7 +45,7 @@
                                     <td>
                                         @foreach ($docentes as $docente)
                                             @if ($asignacionmateria->docente_id == $docente->id)
-                                                <span>{{ $docente->usuario->nombre . ' ' . $docente->usuario->apellidoPaterno . ' ' . $docente->usuario->apellidoMaterno}}</span>
+                                                <span>{{ $docente->usuario->nombre . ' ' . $docente->usuario->apellidoPaterno . ' ' . $docente->usuario->apellidoMaterno }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -63,17 +66,23 @@
                                                 type="button" class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('asignacionmaterias.edit', $asignacionmateria->id) }}"
-                                                type="button" class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('asignacionmaterias.destroy', $asignacionmateria->id) }}"
-                                                onclick="preguntar{{ $asignacionmateria->id }}(event)"
-                                                method="post"id="miFormulario{{ $asignacionmateria->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('asignacionmaterias.edit')
+                                                <a href="{{ route('asignacionmaterias.edit', $asignacionmateria->id) }}"
+                                                    type="button" class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+
+
+                                            @can('asignacionmaterias.destroy')
+                                                <form action="{{ route('asignacionmaterias.destroy', $asignacionmateria->id) }}"
+                                                    onclick="preguntar{{ $asignacionmateria->id }}(event)"
+                                                    method="post"id="miFormulario{{ $asignacionmateria->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

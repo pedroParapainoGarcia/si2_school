@@ -15,14 +15,18 @@
                         </span>
                         <div class="info-box-content">
                             <span class="info-box-text"><b>Inscripciones</b></span>
-                            <a href="{{ route('usuarios.create', ['tipo' => 'Est.']) }}" class="btn btn-primary btn-sm">Nuevo Estudiante</a>
+                            @can('usuarios.create')
+                                <a href="{{ route('usuarios.create', ['tipo' => 'Est.']) }}"
+                                    class="btn btn-primary btn-sm">Nuevo Estudiante</a>
+                            @endcan
+
                         </div>
 
                     </div>
 
                 </div>
 
-               
+
             </div>
         </div>
     </div>

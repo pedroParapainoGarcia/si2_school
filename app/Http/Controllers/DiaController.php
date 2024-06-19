@@ -7,7 +7,15 @@ use Illuminate\Http\Request;
 
 class DiaController extends Controller
 {
-    
+    public function _construct()
+    {
+
+        $this->middleware('can:dias.index')->only('index','show');
+        $this->middleware('can:dias.create')->only('create', 'store');
+        $this->middleware('can:dias.edit')->only('edit', 'update');
+        $this->middleware('can:dias.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $dias = Dia::all();

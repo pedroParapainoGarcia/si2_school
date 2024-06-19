@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class PeriodoController extends Controller
 {
+    public function _construct()
+    {
+
+        $this->middleware('can:periodos.index')->only('index','show');
+        $this->middleware('can:periodos.create')->only('create', 'store');
+        $this->middleware('can:periodos.edit')->only('edit', 'update');
+        $this->middleware('can:periodos.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $periodos = Periodo::all();

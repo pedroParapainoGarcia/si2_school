@@ -11,7 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/niveles/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Nivel</a>
+                        @can('niveles.create')
+                            <a href="{{ route('niveles.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nuevo Nivel</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -24,7 +28,7 @@
                                 <th>
                                     <center>Nombre Nivel</center>
                                 </th>
-                                
+
                                 <th>
                                     <center>Gestion</center>
                                 </th>
@@ -46,7 +50,7 @@
                                 @endphp
                                 <tr>
                                     <td style="text-align: center">{{ $nivel->id }}</td>
-                                    <td> {{ $nivel->nombre }} </td>                                    
+                                    <td> {{ $nivel->nombre }} </td>
                                     <td>
                                         @foreach ($gestiones as $gestion)
                                             @if ($nivel->gestion_id == $gestion->id)
@@ -56,7 +60,7 @@
                                     </td>
                                     <td>
                                         @foreach ($colegios as $colegio)
-                                            @if ($aula->colegio_id == $colegio->id)
+                                            @if ($nivel->colegio_id == $colegio->id)
                                                 <span>{{ $colegio->name }}</span>
                                             @endif
                                         @endforeach
@@ -69,17 +73,22 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('niveles.edit', $nivel->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('niveles.destroy', $nivel->id) }}"
-                                                onclick="preguntar<?= $id ?>(event)" method="post"
-                                                id="miFormulario<?= $id ?>">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('niveles.edit')
+                                                <a href="{{ route('niveles.edit', $nivel->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('niveles.destroy')
+                                                <form action="{{ route('niveles.destroy', $nivel->id) }}"
+                                                    onclick="preguntar<?= $id ?>(event)" method="post"
+                                                    id="miFormulario<?= $id ?>">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar<?= $id ?>(event) {
                                                     event.preventDefault();

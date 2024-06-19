@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/horarios/create') }}" class="btn btn-primary"><i
-                                class="fas fa-plus-circle"></i> Nueva Horario</a>
+                        @can('horarios.create')
+                            <a href="{{ route('horarios.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nueva Horario</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -73,7 +76,7 @@
                                     <td>
                                         @foreach ($intervalos as $intervalo)
                                             @if ($horario->intervalo_id == $intervalo->id)
-                                                <span>{{ $intervalo->horaInicio.'-'. $intervalo->horaFin}}</span>
+                                                <span>{{ $intervalo->horaInicio . '-' . $intervalo->horaFin }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -110,7 +113,7 @@
                                                     $docente = $usuarios->firstWhere('id', $asignacion->docente_id);
                                                 @endphp
 
-                                                <span>{{ $docente ? $docente->nombre .' '. $docente->apellidoPaterno.' '. $docente->apellidoMaterno : '' }}</span>
+                                                <span>{{ $docente ? $docente->nombre . ' ' . $docente->apellidoPaterno . ' ' . $docente->apellidoMaterno : '' }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -120,17 +123,23 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('horarios.edit', $horario->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('horarios.destroy', $horario->id) }}"
-                                                onclick="preguntar{{ $horario->id }}(event)"
-                                                method="post"id="miFormulario{{ $horario->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('horarios.edit')
+                                                <a href="{{ route('horarios.edit', $horario->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+
+                                            @can('horarios.destroy')
+                                                <form action="{{ route('horarios.destroy', $horario->id) }}"
+                                                    onclick="preguntar{{ $horario->id }}(event)"
+                                                    method="post"id="miFormulario{{ $horario->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

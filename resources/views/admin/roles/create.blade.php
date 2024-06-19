@@ -8,7 +8,7 @@
         <h1>Nuevo Rol</h1>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Llene los datos</h3>
@@ -33,7 +33,7 @@
                         <div class="row g-3">
                             <br />
                             @foreach ($permission as $permiso)
-                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group form-switch">
                                         <input class="form-check-input" type="checkbox" name="permission[]" role="switch"
                                             id="{{ $permiso->name }}" value="{{ $permiso->name }}">

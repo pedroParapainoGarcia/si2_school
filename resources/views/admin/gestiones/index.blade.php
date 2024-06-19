@@ -11,7 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/gestiones/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nueva Gestion</a>
+                        @can('gestiones.create')
+                            <a href="{{ route('gestiones.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nueva Gestion</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -74,17 +78,23 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('gestiones.edit', $gestione->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('gestiones.destroy', $gestione->id) }}"
-                                                onclick="preguntar{{ $gestione->id }}(event)"
-                                                method="post"id="miFormulario{{ $gestione->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('gestiones.edit')
+                                                <a href="{{ route('gestiones.edit', $gestione->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+
+                                            @can('gestiones.destroy')
+                                                <form action="{{ route('gestiones.destroy', $gestione->id) }}"
+                                                    onclick="preguntar{{ $gestione->id }}(event)"
+                                                    method="post"id="miFormulario{{ $gestione->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

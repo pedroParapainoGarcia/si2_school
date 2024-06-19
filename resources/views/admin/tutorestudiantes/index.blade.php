@@ -47,7 +47,7 @@
                                     <td>
                                         @foreach ($tutores as $tutor)
                                             @if ($tutorestudiante->tutor_id == $tutor->id)
-                                                <span>{{  $tutor->usuario->apellidoPaterno . ' ' . $tutor->usuario->apellidoMaterno . ' ' . $tutor->usuario->nombre }}</span>
+                                                <span>{{ $tutor->usuario->apellidoPaterno . ' ' . $tutor->usuario->apellidoMaterno . ' ' . $tutor->usuario->nombre }}</span>
                                             @endif
                                         @endforeach
                                     </td>
@@ -56,35 +56,40 @@
                                     <td>
                                         @foreach ($estudiantes as $estudiante)
                                             @if ($tutorestudiante->estudiante_id == $estudiante->id)
-                                                <span>{{$estudiante->usuario->apellidoPaterno . ' ' . $estudiante->usuario->apellidoMaterno . ' ' . $estudiante->usuario->nombre}}</span>
+                                                <span>{{ $estudiante->usuario->apellidoPaterno . ' ' . $estudiante->usuario->apellidoMaterno . ' ' . $estudiante->usuario->nombre }}</span>
                                             @endif
                                         @endforeach
                                     </td>
 
 
-                                    <td>{{ $tutorestudiante->parentesco}}</td>
+                                    <td>{{ $tutorestudiante->parentesco }}</td>
 
-                                     
+
 
 
 
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('tutorestudiantes.show', $tutorestudiante->id) }}" type="button"
-                                                class="btn btn-info">
+                                            <a href="{{ route('tutorestudiantes.show', $tutorestudiante->id) }}"
+                                                type="button" class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('tutorestudiantes.edit', $tutorestudiante->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('tutorestudiantes.destroy', $tutorestudiante->id) }}"
-                                                onclick="preguntar{{ $tutorestudiante->id }}(event)" method="post"
-                                                id="miFormulario{{ $tutorestudiante->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('tutorestudiantes.edit')
+                                                <a href="{{ route('tutorestudiantes.edit', $tutorestudiante->id) }}"
+                                                    type="button" class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('tutorestudiantes.destroy')
+                                                <form action="{{ route('tutorestudiantes.destroy', $tutorestudiante->id) }}"
+                                                    onclick="preguntar{{ $tutorestudiante->id }}(event)" method="post"
+                                                    id="miFormulario{{ $tutorestudiante->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar{{ $tutorestudiante->id }}(event) {
                                                     event.preventDefault();

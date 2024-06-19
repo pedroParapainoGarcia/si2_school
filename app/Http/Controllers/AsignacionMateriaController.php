@@ -10,7 +10,15 @@ use Illuminate\Http\Request;
 
 class AsignacionMateriaController extends Controller
 {
-   
+    public function _construct()
+    {
+
+        $this->middleware('can:asignacionmaterias.index')->only('index','show');
+        $this->middleware('can:asignacionmaterias.create')->only('create', 'store');
+        $this->middleware('can:asignacionmaterias.edit')->only('edit', 'update');
+        $this->middleware('can:asignacionmaterias.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $asignaciones = AsignacionMateria::all();
@@ -19,25 +27,25 @@ class AsignacionMateriaController extends Controller
         return view('admin.asignacionmaterias.index', compact('asignaciones', 'materias', 'docentes'));
     }
 
-    
+
     public function create()
     {
         $materias = Materia::all();
         $usuarios = User::all();
         $docentes = Docente::all();
-        return view('admin.asignacionmaterias.create', compact('materias','docentes','usuarios'));
+        return view('admin.asignacionmaterias.create', compact('materias', 'docentes', 'usuarios'));
     }
 
-   
+
     public function store(Request $request)
     {
-        $this->validate(request(), [           
+        $this->validate(request(), [
             'materia_id' => 'required',
             'docente_id' => 'required',
         ]);
 
         $asignacion = new AsignacionMateria();
-        
+
         $asignacion->materia_id = $request->get('materia_id');
         $asignacion->docente_id = $request->get('docente_id');
         $asignacion->save();
@@ -47,9 +55,9 @@ class AsignacionMateriaController extends Controller
             ->with('icono', 'success');
     }
 
-   
+
     public function show($id)
-    {                      
+    {
         $materia = Materia::all();
         $asignacion = AsignacionMateria::findOrFail($id);
         $iduser = $asignacion->docente_id;
@@ -58,26 +66,26 @@ class AsignacionMateriaController extends Controller
         return view('admin.asignacionmaterias.show', compact('docente', 'materia', 'asignacion'));
     }
 
-    
 
-    public function edit($id) 
+
+    public function edit($id)
     {
         $asignacion = AsignacionMateria::findOrFail($id);
         $materias = Materia::all();
         $materia = [];
-        foreach ($materias as $materiaItem) { 
+        foreach ($materias as $materiaItem) {
             $materia[$materiaItem->id] = $materiaItem->name;
-        } 
-        $docentes=Docente::all();
-        $usuario=User::all();
-        return view('admin.asignacionmaterias.edit', compact('asignacion', 'materia','docentes','usuario'));
+        }
+        $docentes = Docente::all();
+        $usuario = User::all();
+        return view('admin.asignacionmaterias.edit', compact('asignacion', 'materia', 'docentes', 'usuario'));
     }
 
 
-    
+
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [           
+        $this->validate(request(), [
             'materia_id' => 'required',
             'docente_id' => 'required',
         ]);
@@ -92,7 +100,7 @@ class AsignacionMateriaController extends Controller
             ->with('icono', 'success');
     }
 
-    
+
     public function destroy($id)
     {
         AsignacionMateria::destroy($id);

@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class GestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:gestiones.index')->only('index','show');
+        $this->middleware('can:gestiones.create')->only('create', 'store');
+        $this->middleware('can:gestiones.edit')->only('edit', 'update');
+        $this->middleware('can:gestiones.destroy')->only('destroy');
+    }
+    
     public function index()
     {
         $gestiones = Gestion::all();

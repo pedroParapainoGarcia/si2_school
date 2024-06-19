@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Log;
 class ParaleloController extends Controller
 {
 
+    public function _construct()
+    {
+
+        $this->middleware('can:paralelos.index')->only('index','show');
+        $this->middleware('can:paralelos.create')->only('create', 'store');
+        $this->middleware('can:paralelos.edit')->only('edit', 'update');
+        $this->middleware('can:paralelos.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $paralelos = Paralelo::all();

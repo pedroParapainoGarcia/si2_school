@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/aulas/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
-                            Nuevo Aula</a>
+                        @can('aulas.create')
+                            <a href="{{ route('aulas.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nuevo Aula</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -64,17 +67,21 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('aulas.edit', $aula->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('aulas.destroy', $aula->id) }}"
-                                                onclick="preguntar{{ $aula->id }}(event)"
-                                                method="post"id="miFormulario{{ $aula->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('aulas.edit')
+                                                <a href="{{ route('aulas.edit', $aula->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('aulas.destroy')
+                                                <form action="{{ route('aulas.destroy', $aula->id) }}"
+                                                    onclick="preguntar{{ $aula->id }}(event)"
+                                                    method="post"id="miFormulario{{ $aula->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

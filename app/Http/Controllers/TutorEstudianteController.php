@@ -10,9 +10,12 @@ use Illuminate\Http\Request;
 
 class TutorEstudianteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:tutorestudiantes.index')->only('index');
+    }
+
     public function index()
     {
         $usuarios = User::all();

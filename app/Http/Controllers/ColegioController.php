@@ -13,6 +13,14 @@ use Spatie\Permission\Models\Role;
 
 class ColegioController extends Controller
 {
+    public function _construct()
+    {
+
+        $this->middleware('can:colegios.index')->only('index','show');
+        $this->middleware('can:colegios.create')->only('create', 'store');
+        $this->middleware('can:colegios.edit')->only('edit', 'update');
+        $this->middleware('can:colegios.destroy')->only('destroy');
+    }
      
     public function index()
     {

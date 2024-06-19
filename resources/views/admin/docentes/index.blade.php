@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ route('usuarios.create', ['tipo' => 'prof.']) }}" class="btn btn-primary">
-                            <i class="bi bi-person-fill-add"></i> Nuevo Docente</a>
+                        @can('usuarios.create')
+                            <a href="{{ route('usuarios.create', ['tipo' => 'prof.']) }}" class="btn btn-primary">
+                                <i class="bi bi-person-fill-add"></i> Nuevo Docente</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,7 +28,7 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                               
+
                                 <th>
                                     <center>Sexo</center>
                                 </th>
@@ -34,10 +37,10 @@
                                 </th>
                                 <th>
                                     <center>Especialidad</center>
-                                </th>   
+                                </th>
                                 <th>
                                     <center>Nivel Formacion</center>
-                                </th>                                
+                                </th>
                                 <th>
                                     <center>Acciones</center>
                                 </th>
@@ -49,16 +52,17 @@
                                 <tr>
                                     <td style="text-align: center">{{ $docente->id }}</td>
                                     @php
-                                        $usuario = $usuarios->firstWhere('id', $docente->id);                                         
+                                        $usuario = $usuarios->firstWhere('id', $docente->id);
                                         // $paralelo = $paralelos->firstWhere('id', $docente->paralelo_id);
                                     @endphp
 
-                                    <td>{{ $usuario ? $usuario->apellidoPaterno.' '.$usuario->apellidoMaterno .' '. $usuario->nombre : '' }}</td>                                    
+                                    <td>{{ $usuario ? $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno . ' ' . $usuario->nombre : '' }}
+                                    </td>
                                     <td>{{ $usuario ? $usuario->sexo : '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
                                     <td>{{ $docente->especialidad }}</td>
                                     <td>{{ $docente->nivelFormacion }}</td>
-                                    
+
                                     {{-- <td>{{ $paralelo ? $paralelo->grado_escolaridad->name . '-' . $paralelo->sigla : '' }}</td> --}}
 
 
@@ -69,17 +73,23 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('docentes.edit', $docente->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('docentes.destroy', $docente->id) }}"
-                                                onclick="preguntar{{ $docente->id }}(event)" method="post"
-                                                id="miFormulario{{ $docente->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('docentes.edit')
+                                                <a href="{{ route('docentes.edit', $docente->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+
+                                            @can('docentes.destroy')
+                                                <form action="{{ route('docentes.destroy', $docente->id) }}"
+                                                    onclick="preguntar{{ $docente->id }}(event)" method="post"
+                                                    id="miFormulario{{ $docente->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar{{ $docente->id }}(event) {
                                                     event.preventDefault();

@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ url('/admin/intervalos/create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
-                            Nuevo intervalo</a>
+                        @can('intervalos.create')
+                            <a href="{{ route('intervalos.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
+                                Nuevo intervalo</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,11 +28,11 @@
 
                                 <th>
                                     <center>Hora Inicio</center>
-                                </th>  
-                                
+                                </th>
+
                                 <th>
                                     <center>Hora Fin</center>
-                                </th> 
+                                </th>
                                 <th>
                                     <center>Acciones</center>
                                 </th>
@@ -47,8 +50,8 @@
                                 <tr>
                                     <td style="text-align: center">{{ $contador }}</td>
 
-                                    <td> {{ $intervalo->horaInicio }} </td>  
-                                    <td> {{ $intervalo->horaFin }} </td>                                  
+                                    <td> {{ $intervalo->horaInicio }} </td>
+                                    <td> {{ $intervalo->horaFin }} </td>
 
 
                                     <td style="text-align:center">
@@ -57,17 +60,22 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('intervalos.edit', $intervalo->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('intervalos.destroy', $intervalo->id) }}"
-                                                onclick="preguntar{{ $intervalo->id }}(event)"
-                                                method="post"id="miFormulario{{ $intervalo->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('intervalos.edit')
+                                                <a href="{{ route('intervalos.edit', $intervalo->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('intervalos.destroy')
+                                                <form action="{{ route('intervalos.destroy', $intervalo->id) }}"
+                                                    onclick="preguntar{{ $intervalo->id }}(event)"
+                                                    method="post"id="miFormulario{{ $intervalo->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar(id) {
                                                     event.preventDefault();

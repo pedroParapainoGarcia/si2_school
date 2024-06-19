@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class DocenteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:docentes.index')->only('index');
+    }
+
     public function index()
     {
         $usuarios = User::all();         

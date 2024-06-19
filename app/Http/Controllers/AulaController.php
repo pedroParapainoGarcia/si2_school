@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class AulaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:aulas.index')->only('index','show');
+        $this->middleware('can:aulas.create')->only('create', 'store');
+        $this->middleware('can:aulas.edit')->only('edit', 'update');
+        $this->middleware('can:aulas.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $colegios = Colegio::all();

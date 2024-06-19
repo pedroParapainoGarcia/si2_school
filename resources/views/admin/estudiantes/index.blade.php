@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados de estudiantes</h3>
                     <div class="card-tools">
-                        <a href="{{ route('usuarios.create', ['tipo' => 'Est.']) }}" class="btn btn-primary">
-                            <i class="bi bi-person-fill-add"></i> Nuevo Estudiante</a>
+                        @can('usuarios.create')
+                            <a href="{{ route('usuarios.create', ['tipo' => 'Est.']) }}" class="btn btn-primary">
+                                <i class="bi bi-person-fill-add"></i> Nuevo Estudiante</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,7 +28,7 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                                
+
                                 <th>
                                     <center>Nro. Ci</center>
                                 </th>
@@ -62,21 +65,22 @@
                                 <tr>
                                     <td style="text-align: center">{{ $estudiante->id }}</td>
                                     @php
-                                        $usuario = $usuarios->firstWhere('id', $estudiante->id); 
-                                        //$padre = $usuarios->firstWhere('id', $estudiante->padre_id);                                       
+                                        $usuario = $usuarios->firstWhere('id', $estudiante->id);
+                                        //$padre = $usuarios->firstWhere('id', $estudiante->padre_id);
                                         $nivel = $niveles->firstWhere('id', $estudiante->nivel_id);
                                         $paralelo = $paralelos->firstWhere('id', $estudiante->paralelo_id);
-                                    @endphp                                   
-                                    <td>{{ $usuario ? $usuario->apellidoPaterno.' '.$usuario->apellidoMaterno .' '. $usuario->nombre : '' }}</td>                                      
+                                    @endphp
+                                    <td>{{ $usuario ? $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno . ' ' . $usuario->nombre : '' }}
+                                    </td>
                                     <td>{{ $usuario ? $usuario->ci : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->fechaNacimiento: '' }}</td>
+                                    <td>{{ $usuario ? $usuario->fechaNacimiento : '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
                                     <td>{{ $usuario ? $usuario->sexo : '' }}</td>
-                                    
+
                                     <td>{{ $estudiante->nro_rude }}</td>
-                                    
+
                                     <td>{{ $nivel ? $nivel->nombre : '' }}</td>
-                                    <td>{{ $paralelo ? $paralelo->nombre  : '' }}</td>
+                                    <td>{{ $paralelo ? $paralelo->nombre : '' }}</td>
                                     {{-- <td>{{ $padre ? $padre->nombre . ' ' . $padre->apellidoPaterno . ' ' . $padre->apellidoMaterno : '' }}</td> --}}
 
 
@@ -86,17 +90,22 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('estudiantes.edit', $estudiante->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('estudiantes.destroy', $estudiante->id) }}"
-                                                onclick="preguntar{{ $estudiante->id }}(event)" method="post"
-                                                id="miFormulario{{ $estudiante->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('estudiantes.edit')
+                                                <a href="{{ route('estudiantes.edit', $estudiante->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+                                            @can('estudiantes.destroy')
+                                                <form action="{{ route('estudiantes.destroy', $estudiante->id) }}"
+                                                    onclick="preguntar{{ $estudiante->id }}(event)" method="post"
+                                                    id="miFormulario{{ $estudiante->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
+
                                             <script>
                                                 function preguntar{{ $estudiante->id }}(event) {
                                                     event.preventDefault();

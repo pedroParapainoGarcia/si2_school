@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class GradoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function _construct()
+    {
+
+        $this->middleware('can:grados.index')->only('index','show');
+        $this->middleware('can:grados.create')->only('create', 'store');
+        $this->middleware('can:grados.edit')->only('edit', 'update');
+        $this->middleware('can:grados.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $niveles = Nivel::all();

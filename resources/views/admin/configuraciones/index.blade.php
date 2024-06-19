@@ -15,7 +15,11 @@
                         </span>
                         <div class="info-box-content">
                             <span class="info-box-text"><b>Datos de la Institucion</b></span>
-                            <a href="{{ url('/admin/colegios') }}" class="btn btn-primary btn-sm">Configurar</a>
+                            @can('colegios.index')
+                                <a href="{{ route('colegios.index') }}" class="btn btn-primary btn-sm">Configurar</a>
+                            @endcan
+
+
                         </div>
 
                     </div>
@@ -27,7 +31,10 @@
                         <span class="info-box-icon bg-info"><i class="bi bi-calendar-range"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text"><b>Gestion Educativa</b></span>
-                            <a href="{{ url('/admin/gestiones') }}" class="btn btn-info btn-sm">Configurar</a>
+                            @can('gestiones.index')
+                                <a href="{{ route('gestiones.index') }}" class="btn btn-info btn-sm">Configurar</a>
+                            @endcan
+
                         </div>
 
                     </div>

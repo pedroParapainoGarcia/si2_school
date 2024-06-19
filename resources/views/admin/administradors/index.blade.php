@@ -11,8 +11,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Datos registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ route('usuarios.create', ['tipo' => 'Adm.']) }}" class="btn btn-primary">
-                            <i class="bi bi-person-fill-add"></i> Nuevo Administrador</a>
+                        @can('usuarios.create')
+                            <a href="{{ route('usuarios.create', ['tipo' => 'Adm.']) }}" class="btn btn-primary">
+                                <i class="bi bi-person-fill-add"></i> Nuevo Administrador</a>
+                        @endcan
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,7 +28,7 @@
                                 <th>
                                     <center>Nombre</center>
                                 </th>
-                                
+
                                 <th>
                                     <center>Nro. Ci</center>
                                 </th>
@@ -63,12 +66,13 @@
                                         $usuario = $usuarios->firstWhere('id', $admin->id);
                                         $colegio = $colegios->firstWhere('id', $admin->colegio_id);
                                     @endphp
-                                    <td>{{ $usuario ? $usuario->nombre . ' ' . $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno : '' }}</td>
+                                    <td>{{ $usuario ? $usuario->nombre . ' ' . $usuario->apellidoPaterno . ' ' . $usuario->apellidoMaterno : '' }}
+                                    </td>
                                     <td>{{ $usuario ? $usuario->ci : '' }}</td>
                                     <td>{{ $usuario ? $usuario->fechaNacimiento : '' }}</td>
                                     <td>{{ $usuario ? $usuario->telefono : '' }}</td>
                                     <td>{{ $usuario ? $usuario->sexo : '' }}</td>
-                                    <td>{{ $usuario ? $usuario->direccion: '' }}</td>
+                                    <td>{{ $usuario ? $usuario->direccion : '' }}</td>
 
 
                                     <td>{{ $admin->cargo }}</td>
@@ -83,17 +87,23 @@
                                                 class="btn btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('administradors.edit', $admin->id) }}" type="button"
-                                                class="btn btn-success"><i class="bi bi-pencil"></i></a>
-                                            <form action="{{ route('administradors.destroy', $admin->id) }}"
-                                                onclick="preguntar{{ $admin->id }}(event)" method="post"
-                                                id="miFormulario{{ $admin->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    style="border-radius: 0px 5px 5px 0px"><i
-                                                        class="bi bi-trash"></i></button>
-                                            </form>
+                                            @can('administradors.edit')
+                                                <a href="{{ route('administradors.edit', $admin->id) }}" type="button"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                            @endcan
+
+
+                                            @can('administradors.destroy')
+                                                <form action="{{ route('administradors.destroy', $admin->id) }}"
+                                                    onclick="preguntar{{ $admin->id }}(event)" method="post"
+                                                    id="miFormulario{{ $admin->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        style="border-radius: 0px 5px 5px 0px"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            @endcan
                                             <script>
                                                 function preguntar{{ $admin->id }}(event) {
                                                     event.preventDefault();

@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class MateriaController extends Controller
 {
+
+    public function _construct()
+    {
+
+        $this->middleware('can:materias.index')->only('index','show');
+        $this->middleware('can:materias.create')->only('create', 'store');
+        $this->middleware('can:materias.edit')->only('edit', 'update');
+        $this->middleware('can:materias.destroy')->only('destroy');
+    }
     
     public function index()
     {
